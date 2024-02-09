@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.core;
 
 import com.draconincdomain.custommobs.core.CustomMob;
+import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -63,10 +64,12 @@ public class CustomMobCreation {
 
         boolean potionEnabled = (boolean) mobMap.get("potionEnabled");
 
+        int mobID = CustomEntityArrayHandler.getRegisteredCustomMobs().size();
+
         // Create the CustomMob instance
 
         return new CustomMob(name, maxHealth, spawnChance, entityType,
-                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance, armour, potionEnabled);
+                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance, armour, potionEnabled, mobID);
     }
 
 }

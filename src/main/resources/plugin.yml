@@ -7,3 +7,7 @@ commands:
     description: "Will spawn a custom entity from the custom mob enum"
     usage: "/customspawn"
     permission: custommobs.admin
+  reloadcustom:
+    description: "Will reload the mob config values"
+    usage: "/reloadcustom"
+    permission: custommobs.admin

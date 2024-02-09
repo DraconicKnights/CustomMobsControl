@@ -1,5 +1,7 @@
 package com.draconincdomain.custommobs.commands;
 
+import com.draconincdomain.custommobs.utils.DataHandler;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +20,9 @@ public class ReloadConfigCommand implements CommandExecutor {
 
         Player player = (Player) commandSender;
 
+        DataHandler.getInstance().ReloadMobsConfig();
+
+        player.sendMessage(ChatColor.RED + "Reloading mob values");
         return true;
     }
 

@@ -1,10 +1,10 @@
 package com.draconincdomain.custommobs.core;
 
 import com.draconincdomain.custommobs.utils.ColourCode;
+import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EntityEquipment;
@@ -14,41 +14,6 @@ import org.bukkit.potion.PotionEffectType;
 
 
 public class CustomMob {
-
-    /*SKELETON_FLAMER("&6Skeleton Flame Archer", 20, 45, EntityType.SKELETON,
-            ItemBuilder.createEnchantItem(Material.BOW, 1,
-                    new Enchantment[]{Enchantment.ARROW_FIRE, Enchantment.ARROW_DAMAGE},
-                    new int[] {1, 3},
-                    true,true, false,
-                    "&4 Example", "Lore example"),
-            20f, null, null, 0),
-
-    WITHER_SCOUT("&6Wither Scout", 30, 35, EntityType.WITHER_SKELETON,
-            ItemBuilder.createEnchantItem(Material.DIAMOND_AXE, 1,
-                    new Enchantment[]{Enchantment.KNOCKBACK, Enchantment.DAMAGE_UNDEAD},
-                    new int[] {2, 1},
-                    true, true, false,
-                    "&3 Ancient Axe", "lore examole"),
-            12f, null, PotionEffectType.SPEED, 4),
-
-    ZOMBIE_SCOUT("&6Zombie Scout", 18, 55, EntityType.ZOMBIE,
-                   ItemBuilder.createEnchantItem(Material.IRON_AXE, 1,
-                           new Enchantment[]{Enchantment.KNOCKBACK, Enchantment.DAMAGE_ALL},
-            new int[] {1, 2},
-            true, true, false,
-            "&3 Lost Axe", "lore examole"),
-            35f, null,null, 0),
-
-    ZOMBIE_BRUTE("&6Zombie Brute", 40, 25, EntityType.ZOMBIE,
-                 ItemBuilder.createEnchantItem(Material.IRON_SWORD, 1,
-                         new Enchantment[]{Enchantment.DAMAGE_ALL, Enchantment.FIRE_ASPECT},
-            new int[] {2, 1},
-            true, true, false,
-            "&3 Forged Dagger", "lore examole"),
-            28f, ItemBuilder.makeArmourSet(new ItemStack(Material.DIAMOND_CHESTPLATE), null, null, null),
-            null, 0)
-
-    ;*/
     private String name;
     private int level;
     private double maxHealth;
@@ -58,8 +23,10 @@ public class CustomMob {
     private double weaponDropChance;
     private ItemStack[] armour;
     private boolean potionEnabled;
+    private int mobID;
+    private Entity entity;
 
-    public CustomMob(String name, double maxHealth, int spawnChance, EntityType entityType, ItemStack weapon, double weaponDropChance, ItemStack[] armour, boolean potionEnabled) {
+    public CustomMob(String name, double maxHealth, int spawnChance, EntityType entityType, ItemStack weapon, double weaponDropChance, ItemStack[] armour, boolean potionEnabled, int mobID) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.spawnChance = spawnChance;
@@ -68,9 +35,10 @@ public class CustomMob {
         this.weaponDropChance = weaponDropChance;
         this.armour = armour;
         this.potionEnabled = potionEnabled;
+        this.mobID = mobID;
     }
 
-    public LivingEntity spawnEntity(Location location) {
+    public void spawnEntity(Location location) {
         LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, entityType);
         entity.setCustomNameVisible(true);
         entity.setCustomName(ColourCode.colour("&7[&3" + level + "&r&7] " + name + " &r&c" + (int) maxHealth + "/" + (int) maxHealth));
@@ -88,11 +56,20 @@ public class CustomMob {
 
         if (potionEnabled) entity.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1500, 10));
 
-        return entity;
+        setEntity(entity);
+        CustomEntityArrayHandler.getCustomEntities().put(getEntity(), this);
+    }
+
+    private void setEntity(Entity entity) {
+        this.entity = entity;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public double getMaxHealth() {
@@ -121,6 +98,14 @@ public class CustomMob {
 
     public boolean getPotionEnabled() {
         return potionEnabled;
+    }
+
+    public int getMobID() {
+        return mobID;
+    }
+
+    public Entity getEntity() {
+        return entity;
     }
 
 }

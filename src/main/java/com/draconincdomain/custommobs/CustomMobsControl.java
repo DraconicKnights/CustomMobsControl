@@ -1,8 +1,10 @@
 package com.draconincdomain.custommobs;
 
+import com.draconincdomain.custommobs.commands.ReloadConfigCommand;
 import com.draconincdomain.custommobs.commands.SpawnCustomEntity;
 import com.draconincdomain.custommobs.events.CustomEntitySpawnEvent;
 import com.draconincdomain.custommobs.core.CustomEntityData;
+import com.draconincdomain.custommobs.utils.DataHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,13 +22,15 @@ public final class CustomMobsControl extends JavaPlugin {
 
         setInstance();
 
+        new DataHandler();
         new CustomEntityData();
 
-        CustomEntityData.getInstance().load();
+        DataHandler.getInstance().load();
         CustomEntityData.getInstance().GetData();
 
         getServer().getPluginManager().registerEvents(new CustomEntitySpawnEvent(), this);
         getCommand("customspawn").setExecutor(new SpawnCustomEntity());
+        getCommand("reloadcustom").setExecutor(new ReloadConfigCommand());
 
     }
 
@@ -35,7 +39,6 @@ public final class CustomMobsControl extends JavaPlugin {
         // Plugin shutdown logic
 
         CustomMobLogger("Plugin is shutting down");
-
     }
 
     private void setInstance() {
@@ -48,9 +51,5 @@ public final class CustomMobsControl extends JavaPlugin {
 
     public void CustomMobLogger(String log) {
         Bukkit.getServer().getLogger().info(ChatColor.DARK_PURPLE + "[CustomMobLogger]: " + ChatColor.WHITE + log);
-    }
-
-    public void ReloadConfig() {
-        reloadConfig();
     }
 }

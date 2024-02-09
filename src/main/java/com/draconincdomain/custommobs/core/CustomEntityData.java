@@ -1,11 +1,9 @@
 package com.draconincdomain.custommobs.core;
 
-import com.draconincdomain.custommobs.CustomMobsControl;
 
 import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
-import org.bukkit.configuration.file.YamlConfiguration;
+import com.draconincdomain.custommobs.utils.DataHandler;
 
-import java.io.*;
 import java.util.Map;
 
 public class CustomEntityData {
@@ -16,24 +14,13 @@ public class CustomEntityData {
         Instance = this;
     }
 
-    public void load() {
-        File mobsConfig = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
-
-        if (!mobsConfig.exists()) CustomMobsControl.getInstance().saveResource("mobs.yml", false);
-    }
-
-    public static YamlConfiguration GetConfig() {
-        File configFIle = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
-        return YamlConfiguration.loadConfiguration(configFIle);
-    }
-
     public void GetData() {
 
         try {
 
-            for (Map<?, ?> mobMap : GetConfig().getMapList("customMobs")) {
+            for (Map<?, ?> mobMap : DataHandler.GetConfig().getMapList("customMobs")) {
                 CustomMob mob = CustomMobCreation.fromMap(mobMap);
-                CustomEntityArrayHandler.getRegisteredCustomMobs().add(mob);
+                CustomEntityArrayHandler.getRegisteredCustomMobs().put(mob.getMobID(), mob);
             }
 
         } catch (Exception e) {
@@ -49,7 +36,7 @@ public class CustomEntityData {
     }
 
     public boolean isCustomMobsEnabled() {
-        return (boolean) GetConfig().get("customMobsEnabled") == true;
+        return (boolean) DataHandler.GetConfig().get("customMobsEnabled");
     }
 
     public static CustomEntityData getInstance() {
