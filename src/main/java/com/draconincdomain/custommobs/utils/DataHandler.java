@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 
@@ -29,9 +30,9 @@ public class DataHandler {
 
     public void ReloadMobsConfig() {
 
+        RemoveAllCustomMobs();
         CustomEntityArrayHandler.getRegisteredCustomMobs().clear();
         CustomEntityArrayHandler.getCustomEntities().clear();
-        RemoveAllCustomMobs();
 
         load();
 
@@ -41,12 +42,8 @@ public class DataHandler {
     private void RemoveAllCustomMobs() {
         try {
             CustomMobsControl.getInstance().CustomMobLogger("Starting removal of all custom mobs");
-            for (World world : Bukkit.getWorlds()) {
-                for (Entity entities : world.getEntities()) {
-                    if (!CustomEntityArrayHandler.getCustomEntities().containsKey(entities)) return;
-
-                    entities.remove();
-                }
+            for (Entity entity : CustomEntityArrayHandler.getCustomEntities().keySet()) {
+                entity.remove();
             }
             CustomMobsControl.getInstance().CustomMobLogger("All mobs have successfully been removed");
         } catch (Exception e) {

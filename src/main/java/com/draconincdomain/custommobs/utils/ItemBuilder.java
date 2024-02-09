@@ -66,12 +66,16 @@ public class ItemBuilder {
         return item;
     }
 
-    public  static ItemStack[] makeArmourSet(ItemStack helm, ItemStack chest, ItemStack legs, ItemStack boots) {
-        ItemStack[] armour = new ItemStack[4];
-        armour[3] = helm;
-        armour[2] = chest;
-        armour[1] = legs;
-        armour[0] = boots;
-        return armour;
+    public static ItemStack[] makeArmourSet(List<ItemStack> armour) {
+
+        if (armour == null || armour.isEmpty()) return null;
+
+        ItemStack[] armourArray = new ItemStack[armour.size()];
+
+        for (int i = 0; i < armour.size(); i++) {
+            armourArray[i] = armour.get(i);
+        }
+
+        return armourArray;
     }
 }

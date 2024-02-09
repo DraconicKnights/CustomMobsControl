@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.utils;
 
 import com.draconincdomain.custommobs.core.CustomMob;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 
 import java.util.HashMap;

@@ -10,6 +10,8 @@ public class CustomEntityData {
 
     private static CustomEntityData Instance;
 
+
+
     public CustomEntityData() {
         Instance = this;
     }
@@ -19,6 +21,8 @@ public class CustomEntityData {
         try {
 
             for (Map<?, ?> mobMap : DataHandler.GetConfig().getMapList("customMobs")) {
+
+                Map<?, ?> weaponMap = (Map<?, ?>) mobMap.get("weapon");
                 CustomMob mob = CustomMobCreation.fromMap(mobMap);
                 CustomEntityArrayHandler.getRegisteredCustomMobs().put(mob.getMobID(), mob);
             }

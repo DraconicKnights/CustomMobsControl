@@ -24,26 +24,30 @@ public class CustomMobCreation {
 
         Material weaponMaterial = Material.valueOf((String) weaponMap.get("material"));
         int weaponAmount = (int) weaponMap.get("amount");
-        List<String> enchantmentNames = (List<String>) weaponMap.get("enchantments"); // Read enchantment names as strings
-        List<Integer> enchantmentLevels = (List<Integer>) weaponMap.get("enchantmentLevels"); // Reads the Enchantment Levels and streams them to int[] Array
+
+        boolean enchanted = (boolean) weaponMap.get("enchanted");
 
         Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
 
-        List<Enchantment> enchantments = new ArrayList<>();
+        if (enchanted) {
+            List<String> enchantmentNames = (List<String>) weaponMap.get("enchantments"); // Read enchantment names as strings
+            List<Integer> enchantmentLevels = (List<Integer>) weaponMap.get("enchantmentLevels"); // Reads the Enchantment Levels and streams them to int[] Array
+
+            List<Enchantment> enchantments = new ArrayList<>();
 
 //        int[] levelArray = enchantmentLevels.stream().mapToInt(Integer::intValue).toArray();
 //        List<Integer> levelist = Arrays.stream(levelArray).boxed().collect(Collectors.toList());
 
-        for (String enchantmentName : enchantmentNames) {
-            Enchantment enchantment = Enchantment.getByName(enchantmentName);
+            for (String enchantmentName : enchantmentNames) {
+                Enchantment enchantment = Enchantment.getByName(enchantmentName);
 
-            if (enchantment != null) {
-                int level = enchantmentLevels.get(enchantments.size());
-                enchantmentMap.put(enchantment, level);
-                enchantments.add(enchantment);
+                if (enchantment != null) {
+                    int level = enchantmentLevels.get(enchantments.size());
+                    enchantmentMap.put(enchantment, level);
+                    enchantments.add(enchantment);
+                }
             }
         }
-
 
         boolean glow = (boolean) weaponMap.get("glow");
         boolean unbreakable = (boolean) weaponMap.get("unbreakable");
@@ -53,13 +57,22 @@ public class CustomMobCreation {
 
         double weaponDropChance = (double) mobMap.get("weaponDropChance");
 
-        // Assuming 'armour' is stored as a list of ItemStacks
-        List<?> armourList = (List<?>) mobMap.get("armour");
-        ItemStack[] armour = new ItemStack[armourList.size()];
-        for (int i = 0; i < armourList.size(); i++) {
-            Map<?, ?> armourItemMap = (Map<?, ?>) armourList.get(i);
-            Material armourMaterial = Material.valueOf((String) armourItemMap.get("material"));
-            armour[i] = new ItemStack(armourMaterial);
+        boolean hasArmour = (boolean) mobMap.get("hasArmour");
+
+        List<ItemStack> armour = new ArrayList<>();
+
+        if (hasArmour) {
+            List<String> armourNames = (List<String>) mobMap.get("armour");
+
+            for (String armourName : armourNames) {
+                Material material = Material.matchMaterial(armourName);
+
+                if (material != null) continue;
+
+                ItemStack itemStack = new ItemStack(material, 1);
+
+                armour.add(itemStack);
+            }
         }
 
         boolean potionEnabled = (boolean) mobMap.get("potionEnabled");
@@ -69,7 +82,7 @@ public class CustomMobCreation {
         // Create the CustomMob instance
 
         return new CustomMob(name, maxHealth, spawnChance, entityType,
-                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance, armour, potionEnabled, mobID);
+                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance, ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
     }
 
 }
