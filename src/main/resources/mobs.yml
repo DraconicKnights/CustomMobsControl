@@ -1,0 +1,123 @@
+#If enabled custom mobs will be able to spawn
+customMobsEnabled: true
+
+#The spawn distance for the custom mobs
+spawningDistanceMin: 25
+spawningDistanceMax: 50
+
+#The Default Custom Mobs, Add a new mob starting with name and all fields are required!
+customMobs:
+  - name: "&6Skeleton Flame Archer"
+    maxHealth: 20.0
+    spawnChance: 45
+    entityType: SKELETON
+    weapon:
+      material: BOW
+      amount: 1
+      enchantments:
+        - ARROW_FIRE
+        - ARROW_DAMAGE
+      enchantmentLevels:
+        - 1
+        - 3
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eExample"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    armour:
+      - material: DIAMOND_CHESTPLATE
+    potionEnabled: true
+
+  - name: "&6Skeleton Lord"
+    maxHealth: 40.0
+    spawnChance: 38
+    entityType: SKELETON
+    weapon:
+      material: BOW
+      amount: 1
+      enchantments:
+        - ARROW_FIRE
+        - ARROW_DAMAGE
+      enchantmentLevels:
+        - 1
+        - 3
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "Example"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    armour:
+      - material: DIAMOND_CHESTPLATE
+      - material: DIAMOND_LEGGINGS
+    potionEnabled: false
+
+  - name: "&6Zombie Scout"
+    maxHealth: 20.0
+    spawnChance: 65
+    entityType: ZOMBIE
+    weapon:
+      material: IRON_SWORD
+      amount: 1
+      enchantments:
+        - DAMAGE_ALL
+      enchantmentLevels:
+        - 2
+      glow: false
+      unbreakable: true
+      hide: false
+      weaponName: "&2Lost Dagger"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    armour:
+      - material: LEATHER_CHESTPLATE
+      - material: LEATHER_HELMET
+    potionEnabled: false
+
+  - name: "&6Zombie Charger"
+    maxHealth: 25.0
+    spawnChance: 64
+    entityType: ZOMBIE
+    weapon:
+      material: WOODEN_SWORD
+      amount: 1
+      enchantments:
+        - DAMAGE_ALL
+        - FIRE_ASPECT
+      enchantmentLevels:
+        - 2
+        - 1
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&7Old Sword"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    armour:
+      - material: LEATHER_HELMET
+    potionEnabled: false
+
+  - name: "&6 Wither Knight"
+    maxHealth: 25.0
+    spawnChance: 64
+    entityType: WITHER_SKELETON
+    weapon:
+      material: DIAMOND_SWORD
+      amount: 1
+      enchantments:
+        - DAMAGE_ALL
+        - FIRE_ASPECT
+      enchantmentLevels:
+        - 3
+        - 1
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&e Example"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    armour:
+      - material: LEATHER_HELMET
+    potionEnabled: false
