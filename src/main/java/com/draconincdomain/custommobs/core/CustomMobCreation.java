@@ -67,7 +67,7 @@ public class CustomMobCreation {
             for (String armourName : armourNames) {
                 Material material = Material.matchMaterial(armourName);
 
-                if (material != null) continue;
+                if (material == null) continue;
 
                 ItemStack itemStack = new ItemStack(material, 1);
 
@@ -82,7 +82,8 @@ public class CustomMobCreation {
         // Create the CustomMob instance
 
         return new CustomMob(name, maxHealth, spawnChance, entityType,
-                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance, ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
+                ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance,
+                ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
     }
 
 }

@@ -70,6 +70,8 @@ public class ItemBuilder {
 
         if (armour == null || armour.isEmpty()) return null;
 
+        CustomMobsControl.getInstance().CustomMobLogger("Armour Contents: " + armour);
+
         ItemStack[] armourArray = new ItemStack[armour.size()];
 
         for (int i = 0; i < armour.size(); i++) {
