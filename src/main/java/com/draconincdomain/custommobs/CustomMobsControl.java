@@ -1,6 +1,5 @@
 package com.draconincdomain.custommobs;
 
-import com.draconincdomain.custommobs.commands.CommandCore;
 import com.draconincdomain.custommobs.commands.ReloadConfigCommand;
 import com.draconincdomain.custommobs.commands.SpawnCustomEntity;
 import com.draconincdomain.custommobs.events.CustomEntitySpawnEvent;
@@ -15,9 +14,6 @@ public final class CustomMobsControl extends JavaPlugin {
 
     private static CustomMobsControl Instance;
 
-    private SpawnCustomEntity customEntityCommand;
-    private ReloadConfigCommand reloadConfigCommand;
-
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -29,8 +25,8 @@ public final class CustomMobsControl extends JavaPlugin {
         new DataHandler();
         new CustomEntityData();
 
-        customEntityCommand = new SpawnCustomEntity();
-        reloadConfigCommand = new ReloadConfigCommand();
+        new SpawnCustomEntity();
+        new ReloadConfigCommand();
 
         DataHandler.getInstance().load();
         CustomEntityData.getInstance().GetData();

@@ -11,7 +11,6 @@ public class CustomEntityData {
     private static CustomEntityData Instance;
 
 
-
     public CustomEntityData() {
         Instance = this;
     }

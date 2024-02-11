@@ -1,16 +1,11 @@
 package com.draconincdomain.custommobs.commands;
 
-import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,7 @@ public class SpawnCustomEntity extends CommandCore {
 
         List<String> completion = new ArrayList<>();
 
-        if (command.getName().equalsIgnoreCase("customspawn")) {
+        if (command.getName().equalsIgnoreCase(commandName)) {
             if (strings.length == 1) {
                 completion.add("spawn");
             }

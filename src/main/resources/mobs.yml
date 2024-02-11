@@ -30,8 +30,9 @@ customMobs:
     weaponDropChance: 20.0
     hasArmour: true
     armour:
-      - DIAMOND_CHESTPLATE
-    potionEnabled: true
+      - IRON_BOOTS
+      - IRON_LEGGINGS
+    potionEnabled: false
 
   - skeletonFlameAttacker:
     name: "&6Skeleton Flame Attacker"
@@ -54,5 +55,32 @@ customMobs:
     weaponDropChance: 20.0
     hasArmour: true
     armour:
-      - IRON_LEGGINGS
+      - IRON_BOOTS
+    potionEnabled: false
+
+  - zombieSolider:
+    name: "&6Zombie Soldier"
+    maxHealth: 40.0
+    spawnChance: 45
+    entityType: ZOMBIE
+    weapon:
+      material: IRON_SWORD
+      amount: 1
+      enchanted: false
+      enchantments:
+        - DAMAGE_ALL
+        - KNOCKBACK
+      enchantmentLevels:
+        - 2
+        - 2
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eExample"
+      weaponLore: "example lore"
+    weaponDropChance: 20.0
+    hasArmour: true
+    armour:
+      - DIAMOND_BOOTS
+      - DIAMOND_LEGGINGS
     potionEnabled: false

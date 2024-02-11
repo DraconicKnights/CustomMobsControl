@@ -13,8 +13,11 @@ import java.util.List;
 
 public abstract class CommandCore implements CommandExecutor, TabExecutor {
 
+    protected String commandName;
+
     public CommandCore(String cmdName) {
         CustomMobsControl.getInstance().getCommand(cmdName).setExecutor(this);
+        this.commandName = cmdName;
     }
 
     protected abstract void execute(Player player, String[] args);
