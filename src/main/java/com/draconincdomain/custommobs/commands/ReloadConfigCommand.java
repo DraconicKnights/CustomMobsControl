@@ -1,5 +1,6 @@
 package com.draconincdomain.custommobs.commands;
 
+import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.utils.DataHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+@Commands
 public class ReloadConfigCommand extends CommandCore {
 
     public ReloadConfigCommand() {

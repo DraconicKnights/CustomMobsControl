@@ -1,5 +1,6 @@
 package com.draconincdomain.custommobs.commands;
 
+import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+@Commands
 public class SpawnCustomEntity extends CommandCore {
 
     public SpawnCustomEntity() {
@@ -22,8 +24,8 @@ public class SpawnCustomEntity extends CommandCore {
 
         customMob.spawnEntity(player.getLocation());
 
-        player.sendMessage(ChatColor.DARK_BLUE + "Registered Mobs: " + String.valueOf(CustomEntityArrayHandler.getRegisteredCustomMobs().size()));
-        player.sendMessage(ChatColor.DARK_BLUE + "Spawned Custom Mobs: " + String.valueOf(CustomEntityArrayHandler.getCustomEntities().size()));
+        player.sendMessage(ChatColor.DARK_BLUE + "Registered Mobs: " + CustomEntityArrayHandler.getRegisteredCustomMobs().size());
+        player.sendMessage(ChatColor.DARK_BLUE + "Spawned Custom Mobs: " + CustomEntityArrayHandler.getCustomEntities().size());
     }
 
     @Override
