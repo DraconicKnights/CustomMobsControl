@@ -4,6 +4,7 @@ import com.draconincdomain.custommobs.commands.CommandCore;
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.CustomEntityData;
+import com.draconincdomain.custommobs.utils.ColourCode;
 import com.draconincdomain.custommobs.utils.DataHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,6 +41,8 @@ public final class CustomMobsControl extends JavaPlugin {
         // Plugin shutdown logic
 
         CustomMobLogger("Plugin is shutting down");
+
+        DataHandler.getInstance().RemoveAllMobs();
     }
 
     private void registerPluginCore() {
@@ -83,6 +86,6 @@ public final class CustomMobsControl extends JavaPlugin {
     }
 
     public void CustomMobLogger(String log) {
-        Bukkit.getServer().getLogger().info(ChatColor.DARK_PURPLE + "[CustomMobLogger]: " + ChatColor.WHITE + log);
+        Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&5&l[CustomMobLogger]: &r" + log));
     }
 }

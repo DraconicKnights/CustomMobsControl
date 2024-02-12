@@ -82,7 +82,7 @@ public class CustomEntitySpawnEvent implements Listener {
     public void onCustomEntity(CustomEntityEvent customEntityEvent) {
         CustomMob customMob = customEntityEvent.getCustomMob();
 
-        CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName());
+        CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName() + " Type: " + customMob.getName());
     }
 
     private void TriggerCustomEvent(Player player, CustomMob customMob) {

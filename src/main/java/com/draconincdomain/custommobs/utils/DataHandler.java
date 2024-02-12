@@ -39,6 +39,10 @@ public class DataHandler {
         CustomEntityData.getInstance().GetData();
     }
 
+    public void RemoveAllMobs() {
+        RemoveAllCustomMobs();
+    }
+
     private void RemoveAllCustomMobs() {
         try {
             CustomMobsControl.getInstance().CustomMobLogger("Starting removal of all custom mobs");

@@ -21,7 +21,6 @@ public class CustomEntityData {
 
             for (Map<?, ?> mobMap : DataHandler.GetConfig().getMapList("customMobs")) {
 
-                Map<?, ?> weaponMap = (Map<?, ?>) mobMap.get("weapon");
                 CustomMob mob = CustomMobCreation.fromMap(mobMap);
                 CustomEntityArrayHandler.getRegisteredCustomMobs().put(mob.getMobID(), mob);
             }
