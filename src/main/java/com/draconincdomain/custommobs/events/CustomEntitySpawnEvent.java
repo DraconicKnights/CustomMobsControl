@@ -1,5 +1,6 @@
 package com.draconincdomain.custommobs.events;
 
+import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.CustomMob;
@@ -46,7 +47,7 @@ public class CustomEntitySpawnEvent implements Listener {
                 event.getEntity().remove();
 
                 customMob.spawnEntity(spawnLocation);
-                TriggerCustomEvent();
+                TriggerCustomEvent(player, customMob);
                 CustomEntityArrayHandler.getCustomEntities().put(customMob.getEntity(), customMob);
                 break;
             }
@@ -80,16 +81,12 @@ public class CustomEntitySpawnEvent implements Listener {
     @EventHandler
     public void onCustomEntity(CustomEntityEvent customEntityEvent) {
         CustomMob customMob = customEntityEvent.getCustomMob();
+
+        CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName());
     }
 
-    private void TriggerCustomEvent() {
-        try {
-            Event customEvent = CustomEntityEvent.class.getDeclaredConstructor().newInstance();
-            Bukkit.getServer().getPluginManager().callEvent(customEvent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    private void TriggerCustomEvent(Player player, CustomMob customMob) {
+        Bukkit.getServer().getPluginManager().callEvent(new CustomEntityEvent(player, customMob));
     }
 
 }
