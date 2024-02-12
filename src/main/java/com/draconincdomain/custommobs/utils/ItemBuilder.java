@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.utils;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
+import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -44,7 +45,7 @@ public class ItemBuilder {
 
         if (enchantmentMap != null) {
             for (Map.Entry<Enchantment, Integer> entry : enchantmentMap.entrySet()) {
-                CustomMobsControl.getInstance().CustomMobLogger(entry.getKey().toString() + entry.getValue().toString());
+                CustomMobsControl.getInstance().CustomMobLogger(entry.getKey().toString() + entry.getValue().toString(), LoggerLevel.INFO);
                 meta.addEnchant(entry.getKey(), entry.getValue(), true);
             }
         }
@@ -70,7 +71,7 @@ public class ItemBuilder {
 
         if (armour == null || armour.isEmpty()) return null;
 
-        CustomMobsControl.getInstance().CustomMobLogger("Armour Contents: " + armour);
+        CustomMobsControl.getInstance().CustomMobLogger("Armour Contents: " + armour, LoggerLevel.INFO);
 
         ItemStack[] armourArray = new ItemStack[armour.size()];
 

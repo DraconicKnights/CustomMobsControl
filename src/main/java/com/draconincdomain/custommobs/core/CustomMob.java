@@ -15,6 +15,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class CustomMob {
     private String name;
+    private String mobNameID;
+    private boolean champion;
     private int level;
     private double maxHealth;
     private int spawnChance;
@@ -26,8 +28,10 @@ public class CustomMob {
     private int mobID;
     private Entity entity;
 
-    public CustomMob(String name, double maxHealth, int spawnChance, EntityType entityType, ItemStack weapon, double weaponDropChance, ItemStack[] armour, boolean potionEnabled, int mobID) {
+    public CustomMob(String name, String mobNameID, boolean champion, double maxHealth, int spawnChance, EntityType entityType, ItemStack weapon, double weaponDropChance, ItemStack[] armour, boolean potionEnabled, int mobID) {
         this.name = name;
+        this.mobNameID = mobNameID;
+        this.champion = champion;
         this.maxHealth = maxHealth;
         this.spawnChance = spawnChance;
         this.entityType = entityType;
@@ -66,6 +70,14 @@ public class CustomMob {
 
     public String getName() {
         return name;
+    }
+
+    public String getMobNameID() {
+        return mobNameID;
+    }
+
+    public boolean getChampion() {
+        return champion;
     }
 
     public int getLevel() {

@@ -3,9 +3,9 @@ version: '${project.version}'
 main: com.draconincdomain.custommobs.CustomMobsControl
 api-version: '1.20'
 commands:
-  customspawn:
+  custommob:
     description: "Will spawn a custom entity from the custom mob enum"
-    usage: "/customspawn"
+    usage: "/custommob"
     permission: custommobs.admin
   customreload:
     description: "Will reload the mob config values"

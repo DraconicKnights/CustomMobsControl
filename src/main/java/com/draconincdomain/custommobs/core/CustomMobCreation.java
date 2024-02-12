@@ -1,6 +1,5 @@
 package com.draconincdomain.custommobs.core;
 
-import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemBuilder;
 import org.bukkit.Material;
@@ -15,6 +14,8 @@ public class CustomMobCreation {
     public static CustomMob fromMap(Map<?, ?> mobMap) {
 
         String name = (String) mobMap.get("name");
+        String mobNameID = (String) mobMap.get("mobID");
+        boolean isChampion = (boolean) mobMap.get("champion");
         double maxHealth = (double) mobMap.get("maxHealth");
         int spawnChance = (int) mobMap.get("spawnChance");
         EntityType entityType = EntityType.valueOf((String) mobMap.get("entityType"));
@@ -81,7 +82,7 @@ public class CustomMobCreation {
 
         // Create the CustomMob instance
 
-        return new CustomMob(name, maxHealth, spawnChance, entityType,
+        return new CustomMob(name, mobNameID, isChampion, maxHealth, spawnChance, entityType,
                 ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance,
                 ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
     }

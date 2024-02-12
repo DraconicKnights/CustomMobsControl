@@ -5,21 +5,19 @@ import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
-import com.draconincdomain.custommobs.utils.ColourCode;
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
-import com.draconincdomain.custommobs.utils.DataHandler;
-import com.draconincdomain.custommobs.utils.Random;
+import com.draconincdomain.custommobs.core.enums.LoggerLevel;
+import com.draconincdomain.custommobs.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 @Events
 public class CustomEntitySpawnEvent implements Listener {
@@ -82,7 +80,7 @@ public class CustomEntitySpawnEvent implements Listener {
     public void onCustomEntity(CustomEntityEvent customEntityEvent) {
         CustomMob customMob = customEntityEvent.getCustomMob();
 
-        CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName() + " Type: " + customMob.getName());
+        CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName() + " Type: " + customMob.getName(), LoggerLevel.INFO);
     }
 
     private void TriggerCustomEvent(Player player, CustomMob customMob) {

@@ -9,6 +9,8 @@ spawningDistanceMax: 50
 customMobs:
   - skeletonFlameArcher:
     name: "&6Skeleton Flame Archer"
+    mobID: skeletonFlameArcher
+    champion: false
     maxHealth: 20.0
     spawnChance: 45
     entityType: SKELETON
@@ -27,7 +29,7 @@ customMobs:
       hide: true
       weaponName: "&eExample"
       weaponLore: "example lore"
-    weaponDropChance: 20.0
+    weaponDropChance: 2
     hasArmour: true
     armour:
       - IRON_BOOTS
@@ -36,6 +38,8 @@ customMobs:
 
   - skeletonFlameAttacker:
     name: "&6Skeleton Flame Attacker"
+    mobID: skeletonFlameAttacker
+    champion: false
     maxHealth: 30.0
     spawnChance: 45
     entityType: SKELETON
@@ -52,7 +56,7 @@ customMobs:
       hide: true
       weaponName: "&eExample"
       weaponLore: "example lore"
-    weaponDropChance: 20.0
+    weaponDropChance: 1
     hasArmour: true
     armour:
       - IRON_BOOTS
@@ -60,6 +64,8 @@ customMobs:
 
   - zombieSolider:
     name: "&6Zombie Soldier"
+    mobID: skeletonFlameAttacker
+    champion: false
     maxHealth: 40.0
     spawnChance: 45
     entityType: ZOMBIE
@@ -78,7 +84,7 @@ customMobs:
       hide: true
       weaponName: "&eExample"
       weaponLore: "example lore"
-    weaponDropChance: 20.0
+    weaponDropChance: 0.5
     hasArmour: true
     armour:
       - DIAMOND_BOOTS

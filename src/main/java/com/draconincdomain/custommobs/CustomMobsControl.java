@@ -1,13 +1,12 @@
 package com.draconincdomain.custommobs;
 
-import com.draconincdomain.custommobs.commands.CommandCore;
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.utils.ColourCode;
 import com.draconincdomain.custommobs.utils.DataHandler;
+import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
@@ -25,7 +24,7 @@ public final class CustomMobsControl extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
 
-        CustomMobLogger("Plugin is initializing");
+        CustomMobLogger("Plugin is initializing", LoggerLevel.STARTUP);
 
         setInstance();
         registerPluginCore();
@@ -40,7 +39,7 @@ public final class CustomMobsControl extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
 
-        CustomMobLogger("Plugin is shutting down");
+        CustomMobLogger("Plugin is shutting down", LoggerLevel.SHUTDOWN);
 
         DataHandler.getInstance().RemoveAllMobs();
     }
@@ -85,7 +84,21 @@ public final class CustomMobsControl extends JavaPlugin {
         return Instance;
     }
 
-    public void CustomMobLogger(String log) {
-        Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&5&l[CustomMobLogger]: &r" + log));
+    public void CustomMobLogger(String log, LoggerLevel loggerLevel) {
+
+        switch (loggerLevel) {
+            case INFO:
+                Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&5&l[CustomMobLogger]: &r" + log));
+                break;
+            case ERROR:
+                Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&4&l[CustomMobLogger]: &r" + log ));
+                break;
+            case STARTUP:
+                Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&e&l[CustomMobLogger]: &r" + log));
+                break;
+            case SHUTDOWN:
+                Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&3&l[CustomMobLogger]: &r" + log));
+                break;
+        }
     }
 }

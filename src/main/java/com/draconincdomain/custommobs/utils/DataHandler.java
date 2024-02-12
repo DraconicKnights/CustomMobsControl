@@ -2,11 +2,9 @@ package com.draconincdomain.custommobs.utils;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.CustomEntityData;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
+import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 
@@ -45,13 +43,13 @@ public class DataHandler {
 
     private void RemoveAllCustomMobs() {
         try {
-            CustomMobsControl.getInstance().CustomMobLogger("Starting removal of all custom mobs");
+            CustomMobsControl.getInstance().CustomMobLogger("Starting removal of all custom mobs", LoggerLevel.INFO);
             for (Entity entity : CustomEntityArrayHandler.getCustomEntities().keySet()) {
                 entity.remove();
             }
-            CustomMobsControl.getInstance().CustomMobLogger("All mobs have successfully been removed");
+            CustomMobsControl.getInstance().CustomMobLogger("All mobs have successfully been removed", LoggerLevel.INFO);
         } catch (Exception e) {
-            CustomMobsControl.getInstance().CustomMobLogger("An error occurred while attempting to remove all custom mobs");
+            CustomMobsControl.getInstance().CustomMobLogger("An error occurred while attempting to remove all custom mobs", LoggerLevel.INFO);
             e.printStackTrace();
         }
     }
