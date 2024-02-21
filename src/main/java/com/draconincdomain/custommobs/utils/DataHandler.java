@@ -12,11 +12,17 @@ public class DataHandler {
 
     private static DataHandler Instance;
 
+    public int minDistance;
+    public int maxDistance;
+
     public DataHandler() {
         Instance = this;
+        load();
+        GetConfig();
+        setDistanceValues();
     }
 
-    public void load() {
+    private void load() {
         File mobsConfig = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
         if (!mobsConfig.exists()) CustomMobsControl.getInstance().saveResource("mobs.yml", false);
     }
@@ -24,6 +30,11 @@ public class DataHandler {
     public static YamlConfiguration GetConfig() {
         File configFIle = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
         return YamlConfiguration.loadConfiguration(configFIle);
+    }
+
+    private void setDistanceValues() {
+        minDistance = (int) GetConfig().get("spawningDistanceMin");
+        maxDistance = (int) GetConfig().get("spawningDistanceMax");
     }
 
     public void ReloadMobsConfig() {

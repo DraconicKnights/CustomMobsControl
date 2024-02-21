@@ -17,7 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 @Events
 public class CustomEntitySpawnEvent implements Listener {
@@ -37,7 +36,7 @@ public class CustomEntitySpawnEvent implements Listener {
             Location playerLocation = player.getLocation();
             double distance = spawnLocation.distance(playerLocation);
 
-            if (distance > (int) DataHandler.GetConfig().get("spawningDistanceMin") && distance < (int) DataHandler.GetConfig().get("spawningDistanceMax")) {
+            if (distance > DataHandler.getInstance().minDistance && distance < DataHandler.getInstance().maxDistance) {
                 CustomMob customMob = CustomEntityData.getRandomMob();
 
                 if (!Random.SpawnChance(customMob.getSpawnChance())) return;
@@ -46,7 +45,6 @@ public class CustomEntitySpawnEvent implements Listener {
 
                 customMob.spawnEntity(spawnLocation);
                 TriggerCustomEvent(player, customMob);
-                CustomEntityArrayHandler.getCustomEntities().put(customMob.getEntity(), customMob);
                 break;
             }
         }

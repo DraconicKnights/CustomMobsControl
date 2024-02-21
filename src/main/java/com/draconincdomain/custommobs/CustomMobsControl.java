@@ -30,9 +30,6 @@ public final class CustomMobsControl extends JavaPlugin {
         registerPluginCore();
         registerPluginCommands();
         registerEvents();
-
-        DataHandler.getInstance().load();
-        CustomEntityData.getInstance().GetData();
     }
 
     @Override

@@ -29,7 +29,7 @@ customMobs:
       hide: true
       weaponName: "&eExample"
       weaponLore: "example lore"
-    weaponDropChance: 2
+    weaponDropChance: 2.0
     hasArmour: true
     armour:
       - IRON_BOOTS
@@ -56,7 +56,7 @@ customMobs:
       hide: true
       weaponName: "&eExample"
       weaponLore: "example lore"
-    weaponDropChance: 1
+    weaponDropChance: 1.0
     hasArmour: true
     armour:
       - IRON_BOOTS
@@ -64,7 +64,7 @@ customMobs:
 
   - zombieSolider:
     name: "&6Zombie Soldier"
-    mobID: skeletonFlameAttacker
+    mobID: zombieSolider
     champion: false
     maxHealth: 40.0
     spawnChance: 45
