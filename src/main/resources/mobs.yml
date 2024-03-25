@@ -90,3 +90,23 @@ customMobs:
       - DIAMOND_BOOTS
       - DIAMOND_LEGGINGS
     potionEnabled: false
+
+  - zombieWarrior:
+    name: "&6Zombie Warrior"
+    mobID: zombieWarrior
+    champion: false
+    maxHealth: 40.0
+    spawnChance: 45
+    entityType: ZOMBIE
+    weapon:
+      material: IRON_SWORD
+      amount: 1
+      enchanted: false
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eExample"
+      weaponLore: "example lore"
+    weaponDropChance: 0.02
+    hasArmour: false
+    potionEnabled: false

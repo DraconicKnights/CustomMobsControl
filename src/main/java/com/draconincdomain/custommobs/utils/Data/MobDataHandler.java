@@ -65,6 +65,7 @@ public class MobDataHandler {
                 entity.remove();
             }
             CustomMobsControl.getInstance().CustomMobLogger("All mobs have successfully been removed", LoggerLevel.INFO);
+            CustomMobsControl.getInstance().CustomMobLogger("Mobs active: " + CustomEntityArrayHandler.getRegisteredCustomMobs().keySet().size(), LoggerLevel.INFO);
         } catch (Exception e) {
             CustomMobsControl.getInstance().CustomMobLogger("An error occurred while attempting to remove all custom mobs", LoggerLevel.INFO);
             e.printStackTrace();
