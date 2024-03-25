@@ -20,7 +20,6 @@ public class MobDataHandler {
     public MobDataHandler() {
         Instance = this;
         load();
-        GetConfig();
         setDistanceValues();
         setIsEnabledValue();
     }

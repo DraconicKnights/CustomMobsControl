@@ -12,6 +12,7 @@ public class CustomEntityData {
 
     public CustomEntityData() {
         Instance = this;
+        GetData();
     }
 
     public void GetData() {
