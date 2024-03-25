@@ -1,8 +1,7 @@
 package com.draconincdomain.custommobs.core.Inventory;
 
 import com.draconincdomain.custommobs.core.CustomMob;
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
-import com.draconincdomain.custommobs.utils.ItemBuilder;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

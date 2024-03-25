@@ -1,6 +1,6 @@
 package com.draconincdomain.custommobs.utils;
 
-public class Random {
+public abstract class Random {
 
     private static final java.util.Random random = new java.util.Random();
 

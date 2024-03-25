@@ -1,7 +1,7 @@
 package com.draconincdomain.custommobs.core;
 
-import com.draconincdomain.custommobs.utils.ColourCode;
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Desing.ColourCode;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;

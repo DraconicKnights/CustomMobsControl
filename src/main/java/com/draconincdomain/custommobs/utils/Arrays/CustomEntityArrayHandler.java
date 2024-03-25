@@ -1,4 +1,4 @@
-package com.draconincdomain.custommobs.utils;
+package com.draconincdomain.custommobs.utils.Arrays;
 
 import com.draconincdomain.custommobs.core.CustomMob;
 import org.bukkit.entity.Entity;

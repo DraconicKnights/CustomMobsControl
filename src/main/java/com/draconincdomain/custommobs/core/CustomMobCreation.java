@@ -1,6 +1,6 @@
 package com.draconincdomain.custommobs.core;
 
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

@@ -1,10 +1,9 @@
 package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
-import com.draconincdomain.custommobs.utils.DataHandler;
+import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class ReloadConfigCommand extends CommandCore {
     @Override
     protected void execute(Player player, String[] args) {
 
-        DataHandler.getInstance().ReloadMobsConfig();
+        MobDataHandler.getInstance().ReloadMobsConfig();
 
         player.sendMessage(ChatColor.RED + "Reloading mob values");
     }

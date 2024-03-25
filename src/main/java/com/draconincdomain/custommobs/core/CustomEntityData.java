@@ -1,15 +1,14 @@
 package com.draconincdomain.custommobs.core;
 
 
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
-import com.draconincdomain.custommobs.utils.DataHandler;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 
 import java.util.Map;
 
 public class CustomEntityData {
 
     private static CustomEntityData Instance;
-
 
     public CustomEntityData() {
         Instance = this;
@@ -19,7 +18,7 @@ public class CustomEntityData {
 
         try {
 
-            for (Map<?, ?> mobMap : DataHandler.GetConfig().getMapList("customMobs")) {
+            for (Map<?, ?> mobMap : MobDataHandler.GetConfig().getMapList("customMobs")) {
 
                 CustomMob mob = CustomMobCreation.fromMap(mobMap);
                 CustomEntityArrayHandler.getRegisteredCustomMobs().put(mob.getMobID(), mob);
@@ -38,7 +37,7 @@ public class CustomEntityData {
     }
 
     public boolean isCustomMobsEnabled() {
-        return (boolean) DataHandler.GetConfig().get("customMobsEnabled");
+        return MobDataHandler.isEnabled;
     }
 
     public static CustomEntityData getInstance() {

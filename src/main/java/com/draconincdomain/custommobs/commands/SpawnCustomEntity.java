@@ -2,8 +2,8 @@ package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.CustomMob;
-import com.draconincdomain.custommobs.utils.ColourCode;
-import com.draconincdomain.custommobs.utils.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Desing.ColourCode;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;

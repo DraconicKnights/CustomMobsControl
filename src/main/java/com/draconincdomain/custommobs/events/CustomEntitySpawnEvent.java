@@ -7,6 +7,9 @@ import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.*;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
+import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -36,7 +39,7 @@ public class CustomEntitySpawnEvent implements Listener {
             Location playerLocation = player.getLocation();
             double distance = spawnLocation.distance(playerLocation);
 
-            if (distance > DataHandler.getInstance().minDistance && distance < DataHandler.getInstance().maxDistance) {
+            if (distance > MobDataHandler.minDistance && distance < MobDataHandler.maxDistance) {
                 CustomMob customMob = CustomEntityData.getRandomMob();
 
                 if (!Random.SpawnChance(customMob.getSpawnChance())) return;

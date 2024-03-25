@@ -3,8 +3,10 @@ package com.draconincdomain.custommobs;
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.CustomEntityData;
-import com.draconincdomain.custommobs.utils.ColourCode;
-import com.draconincdomain.custommobs.utils.DataHandler;
+import com.draconincdomain.custommobs.player.CustomPlayerData;
+import com.draconincdomain.custommobs.utils.Data.PlayerDataHandler;
+import com.draconincdomain.custommobs.utils.Desing.ColourCode;
+import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -38,12 +40,14 @@ public final class CustomMobsControl extends JavaPlugin {
 
         CustomMobLogger("Plugin is shutting down", LoggerLevel.SHUTDOWN);
 
-        DataHandler.getInstance().RemoveAllMobs();
+        MobDataHandler.getInstance().RemoveAllMobs();
     }
 
     private void registerPluginCore() {
-        new DataHandler();
+        new MobDataHandler();
+        new PlayerDataHandler();
         new CustomEntityData();
+        new CustomPlayerData();
     }
 
     private void registerPluginCommands() {
@@ -57,6 +61,8 @@ public final class CustomMobsControl extends JavaPlugin {
                 e.printStackTrace();
             }
         }
+
+        CustomMobLogger("Commands Registered Successfully", LoggerLevel.INFO);
     }
 
     private void registerEvents() {
@@ -71,14 +77,8 @@ public final class CustomMobsControl extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-    }
 
-    private void setInstance() {
-        Instance = this;
-    }
-
-    public static CustomMobsControl getInstance() {
-        return Instance;
+        CustomMobLogger("Events Registered Successfully", LoggerLevel.INFO);
     }
 
     public void CustomMobLogger(String log, LoggerLevel loggerLevel) {
@@ -97,5 +97,13 @@ public final class CustomMobsControl extends JavaPlugin {
                 Bukkit.getConsoleSender().sendMessage(ColourCode.colour("&3&l[CustomMobLogger]: &r" + log));
                 break;
         }
+    }
+
+    private void setInstance() {
+        Instance = this;
+    }
+
+    public static CustomMobsControl getInstance() {
+        return Instance;
     }
 }

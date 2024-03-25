@@ -1,25 +1,28 @@
-package com.draconincdomain.custommobs.utils;
+package com.draconincdomain.custommobs.utils.Data;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 
 import java.io.File;
 
-public class DataHandler {
+public class MobDataHandler {
 
-    private static DataHandler Instance;
+    private static MobDataHandler Instance;
 
-    public int minDistance;
-    public int maxDistance;
+    public static int minDistance;
+    public static int maxDistance;
+    public static boolean isEnabled;
 
-    public DataHandler() {
+    public MobDataHandler() {
         Instance = this;
         load();
         GetConfig();
         setDistanceValues();
+        setIsEnabledValue();
     }
 
     private void load() {
@@ -35,6 +38,10 @@ public class DataHandler {
     private void setDistanceValues() {
         minDistance = (int) GetConfig().get("spawningDistanceMin");
         maxDistance = (int) GetConfig().get("spawningDistanceMax");
+    }
+
+    private void setIsEnabledValue() {
+        isEnabled = (boolean) GetConfig().get("customMobsEnabled");
     }
 
     public void ReloadMobsConfig() {
@@ -65,7 +72,7 @@ public class DataHandler {
         }
     }
 
-    public static DataHandler getInstance() {
+    public static MobDataHandler getInstance() {
         return Instance;
     }
 }
