@@ -15,7 +15,7 @@ import java.util.List;
 public class SpawnCustomEntity extends CommandCore {
 
     public SpawnCustomEntity() {
-        super("custommob", false);
+        super("custommob");
     }
 
     @Override

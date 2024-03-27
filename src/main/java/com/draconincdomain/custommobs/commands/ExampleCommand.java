@@ -1,14 +1,15 @@
 package com.draconincdomain.custommobs.commands;
 
+import com.draconincdomain.custommobs.core.Annotations.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
+@Commands
 public class ExampleCommand extends CommandCore{
     public ExampleCommand() {
-        super("example", true);
-        this.cooldownDuration = 3000;
+        super("example");
     }
 
     @Override
