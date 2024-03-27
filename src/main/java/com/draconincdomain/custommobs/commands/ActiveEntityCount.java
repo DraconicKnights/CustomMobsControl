@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 @Commands
 public class ActiveEntityCount extends CommandCore {
+
     public ActiveEntityCount() {
         super("entitycount");
     }
@@ -22,4 +23,5 @@ public class ActiveEntityCount extends CommandCore {
     protected List<String> commandCompletion(Player player, Command command, String[] strings) {
         return null;
     }
+
 }

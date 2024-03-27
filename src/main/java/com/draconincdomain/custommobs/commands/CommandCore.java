@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,4 +38,5 @@ public abstract class CommandCore implements CommandExecutor, TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         return commandCompletion((Player) commandSender, command, strings);
     }
+
 }

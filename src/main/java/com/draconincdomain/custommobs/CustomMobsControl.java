@@ -7,6 +7,7 @@ import com.draconincdomain.custommobs.utils.Data.PlayerDataHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
+import com.draconincdomain.custommobs.utils.externalAPI.LuckpermsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,7 @@ public final class CustomMobsControl extends JavaPlugin {
 
         setInstance();
         registerPluginCore();
+        registerExternalAPI();
         registerPluginCommands();
         registerEvents();
     }
@@ -46,6 +48,10 @@ public final class CustomMobsControl extends JavaPlugin {
         new MobDataHandler();
         new PlayerDataHandler();
         new CustomEntityData();
+    }
+
+    private void  registerExternalAPI() {
+        new LuckpermsAPI();
     }
 
     private void registerPluginCommands() {

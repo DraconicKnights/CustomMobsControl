@@ -33,13 +33,12 @@ public class CustomEntitySpawnEvent implements Listener {
         Location spawnLocation = event.getLocation();
         World world = spawnLocation.getWorld();
 
-        if (event.getEntity().isInWater() || event.getEntity().isInLava()) return;
-
         for (Player player : world.getPlayers()) {
             Location playerLocation = player.getLocation();
             double distance = spawnLocation.distance(playerLocation);
 
             if (distance > MobDataHandler.minDistance && distance < MobDataHandler.maxDistance) {
+                if (event.getEntity().isInWater() || event.getEntity().isInLava()) return;
                 CustomMob customMob = CustomEntityData.getRandomMob();
 
                 if (!Random.SpawnChance(customMob.getSpawnChance())) return;
@@ -87,5 +86,4 @@ public class CustomEntitySpawnEvent implements Listener {
     private void TriggerCustomEvent(Player player, CustomMob customMob) {
         Bukkit.getServer().getPluginManager().callEvent(new CustomEntityEvent(player, customMob));
     }
-
 }
