@@ -2,12 +2,12 @@ package com.draconincdomain.custommobs;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.Annotations.Events;
+import com.draconincdomain.custommobs.core.Annotations.Runnable;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.utils.Data.PlayerDataHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
-import com.draconincdomain.custommobs.utils.externalAPI.LuckpermsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,9 +30,7 @@ public final class CustomMobsControl extends JavaPlugin {
 
         setInstance();
         registerPluginCore();
-        registerExternalAPI();
-        registerPluginCommands();
-        registerEvents();
+        registerObjects();
     }
 
     @Override
@@ -50,8 +48,10 @@ public final class CustomMobsControl extends JavaPlugin {
         new CustomEntityData();
     }
 
-    private void  registerExternalAPI() {
-        new LuckpermsAPI();
+    private void registerObjects() {
+        registerPluginCommands();
+        registerEvents();
+        registerRunnables();
     }
 
     private void registerPluginCommands() {
@@ -83,6 +83,21 @@ public final class CustomMobsControl extends JavaPlugin {
         }
 
         CustomMobLogger("Events Registered Successfully", LoggerLevel.INFO);
+    }
+
+    private void registerRunnables() {
+        Reflections reflections = new Reflections("com.draconincdomain.custommobs.runnables", new TypeAnnotationsScanner(), new SubTypesScanner());
+        Set<Class<?>> customRunnableClasses = reflections.getTypesAnnotatedWith(Runnable.class);
+
+        for (Class<?> runableClass : customRunnableClasses) {
+            try {
+                runableClass.getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        CustomMobLogger("Runnable Events Registered Successfully", LoggerLevel.INFO);
     }
 
     public void CustomMobLogger(String log, LoggerLevel loggerLevel) {
