@@ -3,8 +3,6 @@ package com.draconincdomain.custommobs.runnables;
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Annotations.Runnable;
 import com.draconincdomain.custommobs.utils.Runnable.RunnableCore;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 @Runnable
 public class Example extends RunnableCore {
@@ -16,8 +14,6 @@ public class Example extends RunnableCore {
 
     @Override
     protected void event() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage("This is working");
-        }
+        stop();
     }
 }

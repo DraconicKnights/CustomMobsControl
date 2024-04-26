@@ -56,12 +56,17 @@ public class MobDataHandler {
 
     public void RemoveAllMobs() {
         RemoveAllCustomMobs();
+        CustomEntityArrayHandler.getRegisteredCustomMobs().clear();
+        CustomEntityArrayHandler.getRegisteredBossMobs().clear();
     }
 
     private void RemoveAllCustomMobs() {
         try {
             CustomMobsControl.getInstance().CustomMobLogger("Starting removal of all custom mobs", LoggerLevel.INFO);
             for (Entity entity : CustomEntityArrayHandler.getCustomEntities().keySet()) {
+                entity.remove();
+            }
+            for (Entity entity : CustomEntityArrayHandler.getBossEntities().keySet()) {
                 entity.remove();
             }
             CustomMobsControl.getInstance().CustomMobLogger("All mobs have successfully been removed", LoggerLevel.INFO);

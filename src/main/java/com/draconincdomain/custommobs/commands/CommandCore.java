@@ -9,15 +9,21 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public abstract class CommandCore implements CommandExecutor, TabExecutor {
 
     protected String commandName;
+    protected int cooldownDuration;
+    protected Map<UUID, Long> cooldowns = new HashMap<>();
 
-    public CommandCore(String cmdName) {
+    public CommandCore(String cmdName, int cooldown) {
         CustomMobsControl.getInstance().getCommand(cmdName).setExecutor(this);
         this.commandName = cmdName;
+        this.cooldownDuration = cooldown;
     }
 
     protected abstract void execute(Player player, String[] args);
@@ -29,6 +35,15 @@ public abstract class CommandCore implements CommandExecutor, TabExecutor {
         if (commandSender instanceof Player) {
 
             Player player = (Player) commandSender;
+
+            UUID playerID = player.getUniqueId();
+            if (cooldowns.containsKey(playerID)) {
+                long cooldownEnds = cooldowns.get(playerID);
+                if (cooldownEnds > System.currentTimeMillis()) {
+                    return true;
+                }
+            }
+            cooldowns.put(playerID, System.currentTimeMillis() + cooldownDuration * 1000);
 
             execute(player, strings);
             return true;

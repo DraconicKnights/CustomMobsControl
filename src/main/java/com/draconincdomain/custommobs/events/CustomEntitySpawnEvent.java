@@ -2,6 +2,7 @@ package com.draconincdomain.custommobs.events;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Annotations.Events;
+import com.draconincdomain.custommobs.core.BossMob;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
@@ -13,6 +14,7 @@ import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +22,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 @Events
 public class CustomEntitySpawnEvent implements Listener {
@@ -85,5 +90,19 @@ public class CustomEntitySpawnEvent implements Listener {
 
     private void TriggerCustomEvent(Player player, CustomMob customMob) {
         Bukkit.getServer().getPluginManager().callEvent(new CustomEntityEvent(player, customMob));
+    }
+
+    @EventHandler
+    public void onBossDeath(EntityDeathEvent event) {
+        Entity entity = event.getEntity();
+
+        if (CustomEntityArrayHandler.getBossEntities().containsKey(entity)) {
+            BossMob bossMob = CustomEntityArrayHandler.getBossEntities().get(entity);
+           if (bossMob != null) {
+               List<ItemStack> drops = event.getDrops();
+               drops.clear();
+               drops.addAll(bossMob.getLootTable().rollLoot());
+           }
+        }
     }
 }

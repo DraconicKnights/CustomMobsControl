@@ -11,7 +11,7 @@ import java.util.List;
 public class ActiveEntityCount extends CommandCore {
 
     public ActiveEntityCount() {
-        super("entitycount");
+        super("entitycount", 10);
     }
 
     @Override

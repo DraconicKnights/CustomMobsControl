@@ -110,3 +110,44 @@ customMobs:
     weaponDropChance: 0.02
     hasArmour: false
     potionEnabled: false
+
+customBossMobs:
+  - skeletonKing:
+    name: 'Skeleton King'
+    mobID: 'skeletonKing'
+    champion: true
+    maxHealth: 500.0
+    spawnChance: 20
+    entityType: 'SKELETON'
+    weapon:
+      material: 'DIAMOND_SWORD'
+      amount: 1
+      enchanted: true
+      enchantments:
+        - 'SHARPNESS'
+        - 'KNOCKBACK'
+      enchantmentLevels:
+        - 5
+        - 2
+      glow: true
+      unbreakable: true
+      hide: true
+      weaponName: 'Example Sword'
+      weaponLore: 'A sword that once belonged to the Skeleton King.'
+    weaponDropChance: 0.5
+    hasArmour: true
+    armour:
+      - 'DIAMOND_BOOTS'
+      - 'DIAMOND_LEGGINGS'
+      - 'DIAMOND_CHESTPLATE'
+      - 'DIAMOND_HELMET'
+    potionEnabled: true
+    abilities:
+      - 'INCREASE_DAMAGE'
+      - 'FAST_MOVEMENT'
+    attacks:
+      - 'FIREBALL_ATTACK'
+      - 'TELEPORT_ATTACK'
+    lootDrops:
+      - 'DIAMOND'
+      - 'GOLD_INGOT'

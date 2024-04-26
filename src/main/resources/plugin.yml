@@ -19,3 +19,7 @@ commands:
     description: "Example command"
     usage: "/example"
     permission: custommobs.admin
+  spawnboss:
+    description: "Spawns a boss mob"
+    usage: "/spawnboss"
+    permission: custommobs.admin

@@ -1,5 +1,6 @@
 package com.draconincdomain.custommobs.core;
 
+import com.draconincdomain.custommobs.runnables.Example;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemBuilder;
 import org.bukkit.Material;
@@ -26,29 +27,7 @@ public class CustomMobCreation {
         Material weaponMaterial = Material.valueOf((String) weaponMap.get("material"));
         int weaponAmount = (int) weaponMap.get("amount");
 
-        boolean enchanted = (boolean) weaponMap.get("enchanted");
-
-        Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
-
-        if (enchanted) {
-            List<String> enchantmentNames = (List<String>) weaponMap.get("enchantments"); // Read enchantment names as strings
-            List<Integer> enchantmentLevels = (List<Integer>) weaponMap.get("enchantmentLevels"); // Reads the Enchantment Levels and streams them to int[] Array
-
-            List<Enchantment> enchantments = new ArrayList<>();
-
-//        int[] levelArray = enchantmentLevels.stream().mapToInt(Integer::intValue).toArray();
-//        List<Integer> levelist = Arrays.stream(levelArray).boxed().collect(Collectors.toList());
-
-            for (String enchantmentName : enchantmentNames) {
-                Enchantment enchantment = Enchantment.getByName(enchantmentName);
-
-                if (enchantment != null) {
-                    int level = enchantmentLevels.get(enchantments.size());
-                    enchantmentMap.put(enchantment, level);
-                    enchantments.add(enchantment);
-                }
-            }
-        }
+        Map<Enchantment, Integer> enchantmentMap = extractEnchantments(weaponMap);
 
         boolean glow = (boolean) weaponMap.get("glow");
         boolean unbreakable = (boolean) weaponMap.get("unbreakable");
@@ -59,22 +38,7 @@ public class CustomMobCreation {
         double weaponDropChance = (double) mobMap.get("weaponDropChance");
 
         boolean hasArmour = (boolean) mobMap.get("hasArmour");
-
-        List<ItemStack> armour = new ArrayList<>();
-
-        if (hasArmour) {
-            List<String> armourNames = (List<String>) mobMap.get("armour");
-
-            for (String armourName : armourNames) {
-                Material material = Material.matchMaterial(armourName);
-
-                if (material == null) continue;
-
-                ItemStack itemStack = new ItemStack(material, 1);
-
-                armour.add(itemStack);
-            }
-        }
+        List<ItemStack> armour = getArmourItems(mobMap, hasArmour);
 
         boolean potionEnabled = (boolean) mobMap.get("potionEnabled");
 
@@ -87,4 +51,38 @@ public class CustomMobCreation {
                 ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
     }
 
+    private static Map<Enchantment, Integer> extractEnchantments(Map<?, ?> weaponMap) {
+        Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
+        if ((boolean) weaponMap.get("enchanted")) {
+            List<String> enchantmentNames = (List<String>) weaponMap.get("enchantments"); // Read enchantment names as strings
+            List<Integer> enchantmentLevels = (List<Integer>) weaponMap.get("enchantmentLevels"); // Reads the Enchantment Levels and streams them to int[] Array
+
+            for (int i = 0; i < enchantmentNames.size(); i++) {
+                Enchantment enchantment = Enchantment.getByName(enchantmentNames.get(i));
+
+                if (enchantment != null) {
+                    enchantmentMap.put(enchantment, enchantmentLevels.get(i));
+                }
+            }
+        }
+        return enchantmentMap;
+    }
+
+    private static List<ItemStack> getArmourItems(Map<?, ?> mobMap, boolean hasArmour) {
+        List<ItemStack> armour = new ArrayList<>();
+
+        if (hasArmour) {
+            List<String> armourNames = (List<String>) mobMap.get("armour");
+
+            for (String armourName : armourNames) {
+                Material material = Material.matchMaterial(armourName);
+
+                if (material != null) {
+                    ItemStack itemStack = new ItemStack(material, 1);
+                    armour.add(itemStack);
+                }
+            }
+        }
+        return armour;
+    }
 }
