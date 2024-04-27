@@ -2,6 +2,7 @@ package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.BossMob;
+import com.draconincdomain.custommobs.core.CustomMobManager;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import org.bukkit.command.Command;
@@ -23,7 +24,7 @@ public class SpawnBossMob extends CommandCore{
 
             for (BossMob bossMob : bossMobs) {
                 if (bossMob.getMobNameID().equals(mobName)) {
-                    bossMob.spawnEntity(player.getLocation());
+                    CustomMobManager.getInstance().setMobLevelAndSpawn(player, bossMob, player.getLocation());
                     player.sendMessage(ColourCode.colour("&5[CustomMobControl]: Spawned " + bossMob.getName()));
                 }
             }

@@ -6,6 +6,7 @@ import com.draconincdomain.custommobs.core.BossMob;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.CustomMob;
 import com.draconincdomain.custommobs.core.CustomEntityData;
+import com.draconincdomain.custommobs.core.CustomMobManager;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.*;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
@@ -14,9 +15,7 @@ import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -50,7 +49,7 @@ public class CustomEntitySpawnEvent implements Listener {
 
                 event.getEntity().remove();
 
-                customMob.spawnEntity(spawnLocation);
+                CustomMobManager.getInstance().setMobLevelAndSpawn(player, customMob, spawnLocation);
                 TriggerCustomEvent(player, customMob);
                 break;
             }
@@ -59,8 +58,31 @@ public class CustomEntitySpawnEvent implements Listener {
 
     @EventHandler
     public void onCreatureDestroyed(EntityDeathEvent event) {
-        if (!CustomEntityArrayHandler.getCustomEntities().containsKey(event.getEntity())) return;
-        CustomEntityArrayHandler.getCustomEntities().remove(event.getEntity());
+        Entity entity = event.getEntity();
+
+        // Handle for any entity
+        if (CustomEntityArrayHandler.getCustomEntities().containsKey(entity)) {
+            CustomEntityArrayHandler.getCustomEntities().remove(entity);
+            CustomMobsControl.getInstance().CustomMobLogger("Entity removed from CustomEntities", LoggerLevel.INFO);
+        }
+
+        // Handle specifically for boss entities
+        if (CustomEntityArrayHandler.getBossEntities().containsKey(entity)) {
+            CustomMobsControl.getInstance().CustomMobLogger("Entity found in BossEntities", LoggerLevel.INFO);
+            BossMob bossMob = CustomEntityArrayHandler.getBossEntities().get(entity);
+            if (bossMob != null) {
+                List<ItemStack> lootToDrop = bossMob.getLootTable().rollLoot();
+                // Log the loot to be dropped
+                CustomMobsControl.getInstance().CustomMobLogger("Loot to be dropped: " + lootToDrop.toString(), LoggerLevel.INFO);
+
+                List<ItemStack> drops = event.getDrops();
+                drops.clear();
+                drops.addAll(lootToDrop);
+                CustomEntityArrayHandler.getBossEntities().remove(entity);
+            } else {
+                CustomMobsControl.getInstance().CustomMobLogger("BossMob is null", LoggerLevel.INFO);
+            }
+        }
     }
 
     @EventHandler
@@ -77,7 +99,8 @@ public class CustomEntitySpawnEvent implements Listener {
         if (health > damage) {
             health -= damage;
 
-            entity.setCustomName(ColourCode.colour("&7[&3" + customMob.getLevel() + "&r&7] " + customMob.getName() + " &r&c" + (int) health + "/" + (int) customMob.getMaxHealth()));
+            String customName = String.format("&7[&3%s&r&7] %s &r&c%d/%d", customMob.getLevel(), customMob.getName(), (int) health, (int) customMob.getMaxHealth());
+            entity.setCustomName(ColourCode.colour(customName));
         }
     }
 
@@ -88,21 +111,9 @@ public class CustomEntitySpawnEvent implements Listener {
         CustomMobsControl.getInstance().CustomMobLogger("Entity: " + customMob.getEntityType() + " Has spawned near player: " + customEntityEvent.getPlayer().getName() + " Type: " + customMob.getName(), LoggerLevel.INFO);
     }
 
+
     private void TriggerCustomEvent(Player player, CustomMob customMob) {
         Bukkit.getServer().getPluginManager().callEvent(new CustomEntityEvent(player, customMob));
     }
 
-    @EventHandler
-    public void onBossDeath(EntityDeathEvent event) {
-        Entity entity = event.getEntity();
-
-        if (CustomEntityArrayHandler.getBossEntities().containsKey(entity)) {
-            BossMob bossMob = CustomEntityArrayHandler.getBossEntities().get(entity);
-           if (bossMob != null) {
-               List<ItemStack> drops = event.getDrops();
-               drops.clear();
-               drops.addAll(bossMob.getLootTable().rollLoot());
-           }
-        }
-    }
 }

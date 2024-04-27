@@ -5,6 +5,8 @@ import com.draconincdomain.custommobs.core.Annotations.Events;
 import com.draconincdomain.custommobs.core.Annotations.Runnable;
 import com.draconincdomain.custommobs.core.BossMobData;
 import com.draconincdomain.custommobs.core.CustomEntityData;
+import com.draconincdomain.custommobs.core.CustomMobManager;
+import com.draconincdomain.custommobs.core.Player.PlayerDataManager;
 import com.draconincdomain.custommobs.utils.Data.PlayerDataHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
@@ -48,6 +50,8 @@ public final class CustomMobsControl extends JavaPlugin {
         new PlayerDataHandler();
         new CustomEntityData();
         new BossMobData();
+        new CustomMobManager();
+        new PlayerDataManager();
     }
 
     private void registerObjects() {

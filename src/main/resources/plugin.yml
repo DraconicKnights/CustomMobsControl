@@ -23,3 +23,7 @@ commands:
     description: "Spawns a boss mob"
     usage: "/spawnboss"
     permission: custommobs.admin
+  setlevel:
+    description: "Sets the player level"
+    usage: "/setlevel"
+    permission: custommobs.admin

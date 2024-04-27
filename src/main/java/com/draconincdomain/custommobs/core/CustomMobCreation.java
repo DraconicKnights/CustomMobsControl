@@ -40,15 +40,13 @@ public class CustomMobCreation {
         boolean hasArmour = (boolean) mobMap.get("hasArmour");
         List<ItemStack> armour = getArmourItems(mobMap, hasArmour);
 
-        boolean potionEnabled = (boolean) mobMap.get("potionEnabled");
-
         int mobID = CustomEntityArrayHandler.getRegisteredCustomMobs().size();
 
         // Create the CustomMob instance
 
         return new CustomMob(name, mobNameID, isChampion, maxHealth, spawnChance, entityType,
                 ItemBuilder.createEnchantItem(weaponMaterial, weaponAmount, enchantmentMap, glow, unbreakable, hide, weaponName, weaponLore), weaponDropChance,
-                ItemBuilder.makeArmourSet(armour), potionEnabled, mobID);
+                ItemBuilder.makeArmourSet(armour), mobID);
     }
 
     private static Map<Enchantment, Integer> extractEnchantments(Map<?, ?> weaponMap) {

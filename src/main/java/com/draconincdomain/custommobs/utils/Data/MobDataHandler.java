@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.utils.Data;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
+import com.draconincdomain.custommobs.core.BossMobData;
 import com.draconincdomain.custommobs.core.CustomEntityData;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
@@ -48,10 +49,13 @@ public class MobDataHandler {
         RemoveAllCustomMobs();
         CustomEntityArrayHandler.getRegisteredCustomMobs().clear();
         CustomEntityArrayHandler.getCustomEntities().clear();
+        CustomEntityArrayHandler.getRegisteredBossMobs().clear();
+        CustomEntityArrayHandler.getBossEntities().clear();
 
         load();
 
         CustomEntityData.getInstance().GetData();
+        BossMobData.getInstance().getData();
     }
 
     public void RemoveAllMobs() {

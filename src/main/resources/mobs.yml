@@ -34,7 +34,6 @@ customMobs:
     armour:
       - IRON_BOOTS
       - IRON_LEGGINGS
-    potionEnabled: false
 
   - skeletonFlameAttacker:
     name: "&6Skeleton Flame Attacker"
@@ -60,7 +59,6 @@ customMobs:
     hasArmour: true
     armour:
       - IRON_BOOTS
-    potionEnabled: false
 
   - zombieSolider:
     name: "&6Zombie Soldier"
@@ -89,7 +87,6 @@ customMobs:
     armour:
       - DIAMOND_BOOTS
       - DIAMOND_LEGGINGS
-    potionEnabled: false
 
   - zombieWarrior:
     name: "&6Zombie Warrior"
@@ -109,14 +106,13 @@ customMobs:
       weaponLore: "example lore"
     weaponDropChance: 0.02
     hasArmour: false
-    potionEnabled: false
 
 customBossMobs:
   - skeletonKing:
     name: 'Skeleton King'
     mobID: 'skeletonKing'
     champion: true
-    maxHealth: 500.0
+    maxHealth: 125.0
     spawnChance: 20
     entityType: 'SKELETON'
     weapon:
@@ -141,13 +137,19 @@ customBossMobs:
       - 'DIAMOND_LEGGINGS'
       - 'DIAMOND_CHESTPLATE'
       - 'DIAMOND_HELMET'
-    potionEnabled: true
     abilities:
       - 'INCREASE_DAMAGE'
-      - 'FAST_MOVEMENT'
+      - 'SPEED'
+    abilityLevels:
+      - 2
+      - 1
     attacks:
       - 'FIREBALL_ATTACK'
       - 'TELEPORT_ATTACK'
     lootDrops:
-      - 'DIAMOND'
-      - 'GOLD_INGOT'
+      - item: 'DIAMOND'
+        count: 5
+        dropChance: 0.5
+      - item: 'GOLD_INGOT'
+        count: 3
+        dropChance: 0.4

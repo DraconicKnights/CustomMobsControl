@@ -2,6 +2,7 @@ package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
 import com.draconincdomain.custommobs.core.CustomMob;
+import com.draconincdomain.custommobs.core.CustomMobManager;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.Location;
@@ -34,7 +35,7 @@ public class SpawnCustomEntity extends CommandCore {
 
             for (CustomMob customMob : customMobs) {
                 if (customMob.getMobNameID().equals(mobName)) {
-                    customMob.spawnEntity(location);
+                    CustomMobManager.getInstance().setMobLevelAndSpawn(player, customMob, location);
                     player.sendMessage(ColourCode.colour("&5[CustomMobControl]: Spawned " + customMob.getName()));
                 }
             }
@@ -46,7 +47,7 @@ public class SpawnCustomEntity extends CommandCore {
 
             for (CustomMob customMob : customMobs) {
                 if (customMob.getMobNameID().equals(mobName)) {
-                    customMob.spawnEntity(player.getLocation());
+                    CustomMobManager.getInstance().setMobLevelAndSpawn(player, customMob, player.getLocation());
                     player.sendMessage(ColourCode.colour("&5[CustomMobControl]: Spawned " + customMob.getName()));
                 }
             }
