@@ -1,8 +1,8 @@
 package com.draconincdomain.custommobs.utils.Data;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
-import com.draconincdomain.custommobs.core.BossMobData;
-import com.draconincdomain.custommobs.core.CustomEntityData;
+import com.draconincdomain.custommobs.core.RPGData.BossMobData;
+import com.draconincdomain.custommobs.core.RPGData.CustomEntityData;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.configuration.file.YamlConfiguration;

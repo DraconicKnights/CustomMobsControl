@@ -2,6 +2,7 @@ package com.draconincdomain.custommobs.core;
 
 import com.draconincdomain.custommobs.core.Player.PlayerDataManager;
 import com.draconincdomain.custommobs.core.Player.PlayerData;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -9,7 +10,6 @@ import org.bukkit.entity.Player;
 public class CustomMobManager {
     private static CustomMobManager Instance;
     private static final java.util.Random random = new java.util.Random();
-
 
     public CustomMobManager() {
         Instance = this;

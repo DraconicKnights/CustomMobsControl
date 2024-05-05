@@ -1,7 +1,7 @@
 package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.core.Annotations.Commands;
-import com.draconincdomain.custommobs.core.CustomMob;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import com.draconincdomain.custommobs.core.CustomMobManager;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;

@@ -1,5 +1,6 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGData;
 
+import com.draconincdomain.custommobs.core.RPGMobs.BossMob;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 

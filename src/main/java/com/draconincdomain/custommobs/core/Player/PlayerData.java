@@ -21,21 +21,28 @@ public class PlayerData {
         this.xp = xp;
     }
 
-    public void onMobKill(Player player) {
-        addXp(PlayerDataHandler.MOB_KILL_XP, player);
+    public void onMobKill(Player player, int multiplier) {
+        addXp(PlayerDataHandler.MOB_KILL_XP, player, multiplier);
     }
 
-    public void onBlockMine(Player player) {
-        addXp(PlayerDataHandler.BLOCK_BREAK_XP, player);
+    public void onBlockMine(Player player, int multiplier) {
+        addXp(PlayerDataHandler.BLOCK_BREAK_XP, player, multiplier);
     }
 
-    private void addXp(int amount, Player player) {
-        xp += amount;
+    public void addXp(int amount, Player player, int multiplier) {
+        this.xp += amount * multiplier;
+        levelUp(player);
+    }
 
+    public void setXp(int xp, Player player) {
+        this.xp = xp;
+        levelUp(player);
+    }
+
+    private void levelUp(Player player) {
         while (xp >= level * 100) {
             xp -= level * 100;
             level++;
-
             CustomMobManager.getInstance().levelUpPlayer(player, level);
         }
     }

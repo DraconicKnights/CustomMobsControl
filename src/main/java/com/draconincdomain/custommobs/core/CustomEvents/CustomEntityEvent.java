@@ -1,6 +1,6 @@
 package com.draconincdomain.custommobs.core.CustomEvents;
 
-import com.draconincdomain.custommobs.core.CustomMob;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

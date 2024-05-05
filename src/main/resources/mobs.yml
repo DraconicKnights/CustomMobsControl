@@ -60,53 +60,6 @@ customMobs:
     armour:
       - IRON_BOOTS
 
-  - zombieSolider:
-    name: "&6Zombie Soldier"
-    mobID: zombieSolider
-    champion: false
-    maxHealth: 40.0
-    spawnChance: 45
-    entityType: ZOMBIE
-    weapon:
-      material: IRON_SWORD
-      amount: 1
-      enchanted: false
-      enchantments:
-        - DAMAGE_ALL
-        - KNOCKBACK
-      enchantmentLevels:
-        - 2
-        - 2
-      glow: false
-      unbreakable: true
-      hide: true
-      weaponName: "&eExample"
-      weaponLore: "example lore"
-    weaponDropChance: 0.5
-    hasArmour: true
-    armour:
-      - DIAMOND_BOOTS
-      - DIAMOND_LEGGINGS
-
-  - zombieWarrior:
-    name: "&6Zombie Warrior"
-    mobID: zombieWarrior
-    champion: false
-    maxHealth: 40.0
-    spawnChance: 45
-    entityType: ZOMBIE
-    weapon:
-      material: IRON_SWORD
-      amount: 1
-      enchanted: false
-      glow: false
-      unbreakable: true
-      hide: true
-      weaponName: "&eExample"
-      weaponLore: "example lore"
-    weaponDropChance: 0.02
-    hasArmour: false
-
 customBossMobs:
   - skeletonKing:
     name: 'Skeleton King'
@@ -146,6 +99,7 @@ customBossMobs:
     attacks:
       - 'FIREBALL_ATTACK'
       - 'TELEPORT_ATTACK'
+      - 'METEOR_ATTACK'
     lootDrops:
       - item: 'DIAMOND'
         count: 5

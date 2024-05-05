@@ -1,6 +1,7 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGData;
 
 
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 
@@ -36,6 +37,14 @@ public class CustomEntityData {
 
         return CustomEntityArrayHandler.getRegisteredCustomMobs().get(randomIndex);
     }
+
+    public static CustomMob getCustomMobByName(String mobNameID) {
+        return CustomEntityArrayHandler.getRegisteredCustomMobs().values().stream()
+                .filter(mob -> mob.getMobNameID().equals(mobNameID))
+                .findFirst()
+                .orElse(null);
+    }
+
 
     public boolean isCustomMobsEnabled() {
         return MobDataHandler.isEnabled;

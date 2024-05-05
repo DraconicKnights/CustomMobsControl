@@ -1,5 +1,7 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGData;
 
+import com.draconincdomain.custommobs.core.RPGMobs.BossMob;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import com.draconincdomain.custommobs.utils.ItemDrop;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

@@ -1,12 +1,10 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGMobs;
 
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
@@ -45,6 +43,7 @@ public class CustomMob {
     public void spawnEntity(Location location, int level) {
         LivingEntity entity = (LivingEntity) location.getWorld().spawnEntity(location, entityType);
 
+        this.level = level;
         levelScale(level);
 
         // Set custom name
@@ -58,6 +57,10 @@ public class CustomMob {
 
         // Set equipment and drop chances
         handleEquipment(entity);
+
+        if (entity instanceof Zombie || entity instanceof Skeleton) {
+            entity.setFireTicks(0);
+        }
 
         // Set entity and add to custom entities
         setEntity(entity);
@@ -107,6 +110,10 @@ public class CustomMob {
 
     public double getMaxHealth() {
         return maxHealth;
+    }
+
+    public double getHealth() {
+        return ((LivingEntity)getEntity()).getHealth();
     }
 
     public int getSpawnChance() {

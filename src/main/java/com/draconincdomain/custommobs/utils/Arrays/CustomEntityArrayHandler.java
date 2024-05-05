@@ -1,7 +1,7 @@
 package com.draconincdomain.custommobs.utils.Arrays;
 
-import com.draconincdomain.custommobs.core.BossMob;
-import com.draconincdomain.custommobs.core.CustomMob;
+import com.draconincdomain.custommobs.core.RPGMobs.BossMob;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import org.bukkit.entity.Entity;
 
 import java.util.HashMap;
@@ -30,6 +30,5 @@ public class CustomEntityArrayHandler {
     public static Map<Entity, BossMob> getBossEntities() {
         return bossEntities;
     }
-
 
 }

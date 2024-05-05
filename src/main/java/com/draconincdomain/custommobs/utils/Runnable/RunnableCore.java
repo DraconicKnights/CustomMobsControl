@@ -21,11 +21,11 @@ public abstract class RunnableCore extends BukkitRunnable {
         event();
     }
 
-    protected void startTimedTask() {
+    public void startTimedTask() {
         this.runTaskTimer(plugin, delayTicks, periodTicks);
     }
 
-    protected void startTimedAsyncTask() {
+    public void startTimedAsyncTask() {
         this.runTaskTimerAsynchronously(plugin, delayTicks, periodTicks);
     }
 

@@ -1,4 +1,4 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGMobs;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Boss.GameEventScheduler;
@@ -6,18 +6,29 @@ import com.draconincdomain.custommobs.core.Boss.LootTable;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemDrop;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BossMob extends CustomMob {
     private String[] abilities; // Array of special abilities
     private int[] abilityLevels; // Array of ability levels
     private String[] attacks; // Array of special attacks
     private ItemDrop[] lootDrops; // Array of loot drops
+
+    private BossBar bossBar;
+    private List<Audience> nearbyPlayers = new ArrayList<>();
 
     private LootTable lootTable;
 
@@ -48,11 +59,7 @@ public class BossMob extends CustomMob {
                 }
             }
 
-            // Schedule attacks
-            for (String attack : this.getAttacks()) {
-                // Schedule these attacks
-                GameEventScheduler.scheduleSpecialAttack(livingEntity, attack);
-            }
+            new GameEventScheduler(livingEntity, this.getAttacks());
 
             LootTable loot = new LootTable();
             // Check array is not null and length > 0
@@ -79,9 +86,48 @@ public class BossMob extends CustomMob {
                 CustomMobsControl.getInstance().CustomMobLogger("Boss Mob loot content: " + lootContent.toString(), LoggerLevel.INFO);
             }
 
+            this.bossBar = BossBar.bossBar(Component.text(this.getName()), 1f, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+
         }
 
         CustomEntityArrayHandler.getBossEntities().put(getEntity(), this);
+    }
+
+    public void updateNearbyPlayers() {
+        List<Player> currentNearbyPlayers = getEntity().getNearbyEntities(50, 50, 50).stream()
+                .filter(Player.class::isInstance)
+                .map(Player.class::cast)
+                .collect(Collectors.toList());
+
+        for (Audience player : new ArrayList<>(nearbyPlayers)) {
+            if (!currentNearbyPlayers.contains(player)) {
+                player.hideBossBar(bossBar);
+                nearbyPlayers.remove(player);
+                bossBar.removeViewer(player);
+            }
+        }
+
+        for (Player player : currentNearbyPlayers) {
+            if (!nearbyPlayers.contains(player)) {
+                player.showBossBar(bossBar);
+                nearbyPlayers.add(player);
+                bossBar.addViewer(player);
+            }
+        }
+    }
+
+    @Override
+    public double getMaxHealth() {
+        return super.getMaxHealth();
+    }
+
+    @Override
+    public double getHealth() {
+        return super.getHealth();
+    }
+
+    public BossBar getBossBar() {
+        return bossBar;
     }
 
     public String[] getAbilities() {
@@ -91,7 +137,6 @@ public class BossMob extends CustomMob {
     public int[] getAbilityLevels() {
         return abilityLevels;
     }
-
 
     public String[] getAttacks() {
         return attacks;

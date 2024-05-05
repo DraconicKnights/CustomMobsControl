@@ -1,6 +1,6 @@
-package com.draconincdomain.custommobs.core;
+package com.draconincdomain.custommobs.core.RPGData;
 
-import com.draconincdomain.custommobs.runnables.Example;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemBuilder;
 import org.bukkit.Material;

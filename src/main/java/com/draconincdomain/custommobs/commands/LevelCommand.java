@@ -11,15 +11,15 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 @Commands
-public class SetLevel extends CommandCore{
-    public SetLevel() {
-        super("setlevel", 0);
+public class LevelCommand extends CommandCore{
+    public LevelCommand() {
+        super("level", 0);
     }
 
     @Override
     protected void execute(Player player, String[] args) {
         if (args.length < 1 || args.length > 2) {
-            player.sendMessage(ChatColor.RED + "Invalid usage. Usage: /setlevel [player] <level>");
+            player.sendMessage(ChatColor.RED + "Invalid usage. Usage: /level [player] <level>");
             return;
         }
 
