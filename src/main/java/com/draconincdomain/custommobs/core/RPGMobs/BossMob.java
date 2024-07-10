@@ -25,8 +25,7 @@ public class BossMob extends CustomMob {
     private String[] abilities; // Array of special abilities
     private int[] abilityLevels; // Array of ability levels
     private String[] attacks; // Array of special attacks
-    private ItemDrop[] lootDrops; // Array of loot drops
-
+    private ItemDrop[] lootDrops; // Array of loot drops for boss mob
     private BossBar bossBar;
     private List<Audience> nearbyPlayers = new ArrayList<>();
 
@@ -36,7 +35,7 @@ public class BossMob extends CustomMob {
     public BossMob(String name, String mobNameID, boolean champion, double maxHealth, int spawnChance, EntityType entityType, ItemStack weapon, double weaponDropChance, ItemStack[] armour, int mobID,
                    String[] abilities, int[] abilityLevels, String[] attacks, ItemDrop[] lootDrops) {
 
-        super(name, mobNameID, champion, maxHealth, spawnChance, entityType, weapon, weaponDropChance, armour, mobID);
+        super(name, mobNameID, champion, maxHealth, spawnChance, entityType, weapon, weaponDropChance, armour, mobID, null);
 
         this.abilities = abilities;
         this.abilityLevels = abilityLevels;

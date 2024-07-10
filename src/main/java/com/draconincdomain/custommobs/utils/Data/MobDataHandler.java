@@ -3,20 +3,27 @@ package com.draconincdomain.custommobs.utils.Data;
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.RPGData.BossMobData;
 import com.draconincdomain.custommobs.core.RPGData.CustomEntityData;
+import com.draconincdomain.custommobs.core.RPGData.CustomMobCreation;
+import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MobDataHandler {
 
     private static MobDataHandler Instance;
-
     public static int minDistance;
     public static int maxDistance;
     public static boolean isEnabled;
+    private static File mobDataFile = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
+    private static YamlConfiguration mobDataConfig = YamlConfiguration.loadConfiguration(mobDataFile);
 
     public MobDataHandler() {
         Instance = this;
@@ -26,26 +33,24 @@ public class MobDataHandler {
     }
 
     private void load() {
-        File mobsConfig = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
-        if (!mobsConfig.exists()) CustomMobsControl.getInstance().saveResource("mobs.yml", false);
+        if (!mobDataFile.exists()) CustomMobsControl.getInstance().saveResource("mobs.yml", false);
+        mobDataConfig = YamlConfiguration.loadConfiguration(mobDataFile);
     }
 
     public static YamlConfiguration GetConfig() {
-        File configFIle = new File(CustomMobsControl.getInstance().getDataFolder(), "mobs.yml");
-        return YamlConfiguration.loadConfiguration(configFIle);
+        return mobDataConfig;
     }
 
     private void setDistanceValues() {
-        minDistance = (int) GetConfig().get("spawningDistanceMin");
-        maxDistance = (int) GetConfig().get("spawningDistanceMax");
+        minDistance = mobDataConfig.getInt("spawningDistanceMin");
+        maxDistance = mobDataConfig.getInt("spawningDistanceMax");
     }
 
     private void setIsEnabledValue() {
-        isEnabled = (boolean) GetConfig().get("customMobsEnabled");
+        isEnabled = mobDataConfig.getBoolean("customMobsEnabled");
     }
 
     public void ReloadMobsConfig() {
-
         RemoveAllCustomMobs();
         CustomEntityArrayHandler.getRegisteredCustomMobs().clear();
         CustomEntityArrayHandler.getCustomEntities().clear();
@@ -83,5 +88,18 @@ public class MobDataHandler {
 
     public static MobDataHandler getInstance() {
         return Instance;
+    }
+
+    public static void saveCustomMobData() {
+        List<Map<String, Object>> mobList = new ArrayList<>();
+        for (CustomMob mob : CustomEntityArrayHandler.getRegisteredCustomMobs().values()) {
+            mobList.add(CustomMobCreation.toMap(mob));
+        }
+        mobDataConfig.set("customMobs", mobList);
+        try {
+            mobDataConfig.save(mobDataFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

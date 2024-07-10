@@ -13,9 +13,8 @@ public class MobInfoMenu {
     private Inventory inventory;
 
     public MobInfoMenu(CustomMob mob) {
-        this.inventory = Bukkit.createInventory(null, 9, "Mob Info");  // assuming that the player will not interact with it
+        this.inventory = Bukkit.createInventory(null, 9, "Mob Info");
 
-        // Below are just examples when addItem() is called, adapt to your needs
         addItem("Name: " + ChatColor.stripColor(mob.getName()), Material.PAPER);
         addItem("Entity type: " + mob.getEntityType().name(), Material.BOOK);
     }

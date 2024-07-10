@@ -45,6 +45,10 @@ public class CustomEntityData {
                 .orElse(null);
     }
 
+    public void registerCustomMob(CustomMob mob) {
+        CustomEntityArrayHandler.getRegisteredCustomMobs().put(mob.getMobID(), mob);
+        MobDataHandler.saveCustomMobData();
+    }
 
     public boolean isCustomMobsEnabled() {
         return MobDataHandler.isEnabled;

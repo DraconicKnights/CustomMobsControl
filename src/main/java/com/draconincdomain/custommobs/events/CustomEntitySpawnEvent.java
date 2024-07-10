@@ -2,6 +2,7 @@ package com.draconincdomain.custommobs.events;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Annotations.Events;
+import com.draconincdomain.custommobs.core.Boss.LootTable;
 import com.draconincdomain.custommobs.core.RPGMobs.BossMob;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
@@ -45,14 +46,14 @@ public class CustomEntitySpawnEvent implements Listener {
         for (Player player : world.getPlayers()) {
             Location playerLocation = player.getLocation();
             double distance = spawnLocation.distance(playerLocation);
-            int minDistance = calculateMinSpawnDistance(player); // Custom method to calculate minimum spawn distance
-            int maxDistance = calculateMaxSpawnDistance(player); // Custom method to calculate maximum spawn distance
+            int minDistance = calculateMinSpawnDistance(player);
+            int maxDistance = calculateMaxSpawnDistance(player);
 
             if (distance > minDistance && distance < maxDistance) {
 
                 Block spawnBlock = spawnLocation.getBlock();
 
-                if (spawnBlock.getType() == Material.WATER || spawnBlock.getRelative(BlockFace.UP).getType() == Material.WATER)
+                if (spawnBlock.getType() == Material.WATER || spawnBlock.getRelative(BlockFace.UP).getType() == Material.WATER || spawnBlock.getType() == Material.AIR)
                     return;
 
                 CustomMob customMob = CustomEntityData.getRandomMob();
@@ -85,8 +86,20 @@ public class CustomEntitySpawnEvent implements Listener {
 
         // Handle for any entity
         if (CustomEntityArrayHandler.getCustomEntities().containsKey(entity)) {
+            CustomMob customMob = CustomEntityArrayHandler.getCustomEntities().get(entity);
             CustomEntityArrayHandler.getCustomEntities().remove(entity);
-            CustomMobsControl.getInstance().CustomMobLogger("Entity removed from CustomEntities", LoggerLevel.INFO);
+
+            if (customMob != null) {
+                List<ItemStack> lootToDrop = customMob.getLootTable().rollLoot();
+                // Log the loot to be dropped
+                CustomMobsControl.getInstance().CustomMobLogger("Loot to be dropped: " + lootToDrop.toString(), LoggerLevel.INFO);
+
+                List<ItemStack> drops = event.getDrops();
+                drops.clear();
+                drops.addAll(lootToDrop);
+            } else {
+                CustomMobsControl.getInstance().CustomMobLogger("CustomMob is null", LoggerLevel.INFO);
+            }
         }
 
         // Handle specifically for boss entities

@@ -25,9 +25,8 @@ public class MobListMenu implements InventoryHolder {
         int size = Math.min(numRows * 9, 54);
 
         this.inventory = Bukkit.createInventory(this, size, ColourCode.colour("&5 Registered Entities"));
-        // Add an item for each registered custom mob
         for (CustomMob mob : CustomEntityArrayHandler.getRegisteredCustomMobs().values()) {
-            addItem(mob);  // assuming getEntityType() returns an EntityType
+            addItem(mob);
         }
     }
 
@@ -39,7 +38,7 @@ public class MobListMenu implements InventoryHolder {
         lore.add("ID: " + mob.getMobID());
         meta.setLore(lore);
         item.setItemMeta(meta);
-        inventory.addItem(item);  // to the next empty slot
+        inventory.addItem(item);
     }
 
     public void open(Player player) {

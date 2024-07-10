@@ -27,13 +27,20 @@ customMobs:
       glow: false
       unbreakable: true
       hide: true
-      weaponName: "&eExample"
-      weaponLore: "example lore"
+      weaponName: "&eFlaming Bow"
+      weaponLore: "Infused with the power of fire."
     weaponDropChance: 2.0
     hasArmour: true
     armour:
-      - IRON_BOOTS
-      - IRON_LEGGINGS
+      - CHAINMAIL_BOOTS
+      - CHAINMAIL_LEGGINGS
+    lootDrops:
+      - item: 'SKELETON_SKULL'
+        count: 1
+        dropChance: 0.05
+      - item: 'BONE'
+        count: 3
+        dropChance: 0.5
 
   - skeletonFlameAttacker:
     name: "&6Skeleton Flame Attacker"
@@ -43,22 +50,236 @@ customMobs:
     spawnChance: 45
     entityType: SKELETON
     weapon:
-      material: STONE_SWORD
+      material: NETHERITE_SWORD
+      amount: 1
+      enchanted: true
+      enchantments:
+        - FIRE_ASPECT
+        - SHARPNESS
+      enchantmentLevels:
+        - 2
+        - 3
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eBlazing Sword"
+      weaponLore: "Sword with a burning touch."
+    weaponDropChance: 1.0
+    hasArmour: true
+    armour:
+      - CHAINMAIL_BOOTS
+      - CHAINMAIL_CHESTPLATE
+    lootDrops:
+      - item: 'SKELETON_SKULL'
+        count: 1
+        dropChance: 0.05
+      - item: 'BONE'
+        count: 3
+        dropChance: 0.5
+
+  - creeperMiner:
+    name: "&6Creeper Miner"
+    mobID: creeperMiner
+    champion: false
+    maxHealth: 15.0
+    spawnChance: 30
+    entityType: CREEPER
+    weapon:
+      material: STONE_PICKAXE
+      amount: 1
+      enchanted: true
+      enchantments:
+        - DIG_SPEED
+      enchantmentLevels:
+        - 3
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eMiner's Foe"
+      weaponLore: "Creeper's choice tool."
+    weaponDropChance: 1.0
+    hasArmour: false
+    lootDrops:
+      - item: 'TNT'
+        count: 1
+        dropChance: 0.01
+      - item: 'GUNPOWDER'
+        count: 3
+        dropChance: 0.5
+
+  - skeletonIceMage:
+    name: "&6Skeleton Ice Mage"
+    mobID: skeletonIceMage
+    champion: true
+    maxHealth: 35.0
+    spawnChance: 40
+    entityType: SKELETON
+    weapon:
+      material: STICK
+      amount: 1
+      enchanted: true
+      enchantments:
+        - ARROW_SLOW
+      enchantmentLevels:
+        - 3
+      glow: true
+      unbreakable: true
+      hide: false
+      weaponName: "&eWand of Frost"
+      weaponLore: "Casts freezing spells."
+    weaponDropChance: 1.5
+    hasArmour: true
+    armour:
+      - LEATHER_BOOTS
+      - LEATHER_TUNIC
+      - LEATHER_HELMET
+    lootDrops:
+      - item: 'SNOWBALL'
+        count: 4
+        dropChance: 0.10
+      - item: 'ICE'
+        count: 2
+        dropChance: 0.05
+
+  - spiderNetSpinner:
+    name: "&6Spider Net Spinner"
+    mobID: spiderNetSpinner
+    champion: false
+    maxHealth: 20.0
+    spawnChance: 35
+    entityType: SPIDER
+    weapon:
+      material: WOODEN_PICKAXE
+      amount: 1
+      enchanted: false
+      glow: false
+      unbreakable: true
+      hide: true
+      weaponName: "&eSpinner's Tear"
+      weaponLore: "Some webs are stronger."
+    weaponDropChance: 3.0
+    hasArmour: false
+    lootDrops:
+      - item: 'SPIDER_EYE'
+        count: 3
+        dropChance: 0.4
+      - item: 'COBWEB'
+        count: 1
+        dropChance: 0.2
+
+  - witchBrewMaster:
+    name: "&6Witch Brew Master"
+    mobID: witchBrewMaster
+    champion: true
+    maxHealth: 30.0
+    spawnChance: 40
+    entityType: WITCH
+    hasArmour: false
+    lootDrops:
+      - item: 'POTION'
+        count: 1
+        dropChance: 0.05
+        potion:
+          type: 'INSTANT_DAMAGE'
+          extended: false
+          upgraded: true
+      - item: 'REDSTONE'
+        count: 2
+        dropChance: 0.4
+
+  - ironGolemProtector:
+    name: "&6Iron Golem Protector"
+    mobID: ironGolemProtector
+    champion: true
+    maxHealth: 80.0
+    spawnChance: 50
+    entityType: IRON_GOLEM
+    hasArmour: false
+    lootDrops:
+      - item: 'IRON_INGOT'
+        count: 5
+        dropChance: 0.50
+      - item: 'POPPY'
+        count: 1
+        dropChance: 0.40
+
+  - phantomNightmare:
+    name: "&6Phantom Nightmare"
+    mobID: phantomNightmare
+    champion: false
+    maxHealth: 30.0
+    spawnChance: 60
+    entityType: PHANTOM
+    hasArmour: false
+    lootDrops:
+      - item: 'PHANTOM_MEMBRANE'
+        count: 1
+        dropChance: 0.20
+      - item: 'ENDER_PEARL'
+        count: 1
+        dropChance: 0.10
+
+  - endermanPortalMaster:
+    name: "&6Enderman Portal Master"
+    mobID: endermanPortalMaster
+    champion: false
+    maxHealth: 40.0
+    spawnChance: 45
+    entityType: ENDERMAN
+    hasArmour: false
+    lootDrops:
+      - item: 'ENDER_PEARL'
+        count: 1
+        dropChance: 0.50
+      - item: 'ENDER_EYE'
+        count: 1
+        dropChance: 0.10
+
+  - vindicatorChief:
+    name: "&6Vindicator Chief"
+    mobID: vindicatorChief
+    champion: true
+    maxHealth: 50.0
+    spawnChance: 50
+    entityType: VINDICATOR
+    weapon:
+      material: DIAMOND_AXE
       amount: 1
       enchanted: true
       enchantments:
         - DAMAGE_ALL
       enchantmentLevels:
-        - 2
-      glow: false
+        - 5
+      glow: true
       unbreakable: true
-      hide: true
-      weaponName: "&eExample"
-      weaponLore: "example lore"
-    weaponDropChance: 1.0
-    hasArmour: true
-    armour:
-      - IRON_BOOTS
+      hide: false
+      weaponName: "&eChief's Beheader"
+      weaponLore: "Respect is earned."
+    weaponDropChance: 3.0
+    hasArmour: false
+    lootDrops:
+      - item: 'EMERALD'
+        count: 2
+        dropChance: 0.20
+      - item: 'TOTEM_OF_UNDYING'
+        count: 1
+        dropChance: 0.01
+
+  - ghastFlameBringer:
+    name: "&6Ghast Flame Bringer"
+    mobID: ghastFlameBringer
+    champion: false
+    maxHealth: 30.0
+    spawnChance: 65
+    entityType: GHAST
+    hasArmour: false
+    lootDrops:
+      - item: 'GUNPOWDER'
+        count: 2
+        dropChance: 0.30
+      - item: 'GHAST_TEAR'
+        count: 1
+        dropChance: 0.10
 
 customBossMobs:
   - skeletonKing:

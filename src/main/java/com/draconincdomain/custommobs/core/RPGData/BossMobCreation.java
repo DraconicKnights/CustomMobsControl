@@ -13,8 +13,6 @@ import java.util.Objects;
 public class BossMobCreation {
     public static BossMob fromMap(Map<?, ?> bossMobMap) {
 
-        // This would be similar to CustomMobCreation#FromMap but this time you extract boss-specific information.
-
         // Convert abilities, attacks and lootDrops from objects to Strings.
         String[] abilities = convertToArrString(bossMobMap.get("abilities"));
         int[] potionValues = convertToIntArray(bossMobMap.get("abilityLevels"));
@@ -32,9 +30,7 @@ public class BossMobCreation {
                 customMob.getArmour(), customMob.getMobID(), abilities, potionValues, attacks, lootDrops);
     }
 
-    // Helper method to convert objects to String[]
     private static String[] convertToArrString(Object obj) {
-        // Assume obj is an instance of List of String
         if(obj instanceof List<?>) {
             List<?> list = (List<?>) obj;
             return list.stream()
@@ -47,8 +43,7 @@ public class BossMobCreation {
         return new String[0];
     }
 
-    private static int[] convertToIntArray(Object obj) { // new function
-        // Assume obj is an instance of List of Integers
+    private static int[] convertToIntArray(Object obj) {
         if(obj instanceof List<?>) {
             List<?> list = (List<?>) obj;
             return list.stream()
@@ -62,7 +57,6 @@ public class BossMobCreation {
     }
 
     private static ItemDrop[] convertToItemDropArray(Object obj) {
-        // Assume obj is an instance of List of Map representing an item and drop chance
         if(obj instanceof List<?>) {
             List<?> list = (List<?>) obj;
             return list.stream()
