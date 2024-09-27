@@ -41,6 +41,20 @@ public class SpawnCustomEntity extends CommandCore {
             }
         }
 
+        if (args.length == 2) {
+            String mobName = args[0];
+            CustomMob[] customMobs = CustomEntityArrayHandler.getRegisteredCustomMobs().values().toArray(new CustomMob[0]);
+
+            for (CustomMob customMob : customMobs) {
+                if (customMob.getMobNameID().equals(mobName)) {
+                    for (int i = 0; i < Integer.parseInt(args[1]); i++) {
+                        CustomMobManager.getInstance().setMobLevelAndSpawn(player, customMob, player.getLocation());
+                    }
+                    player.sendMessage(ColourCode.colour("&5[CustomMobControl]: Spawned " + customMob.getName()));
+                }
+            }
+        }
+
         if (args.length == 1) {
             String mobName = args[0];
             CustomMob[] customMobs = CustomEntityArrayHandler.getRegisteredCustomMobs().values().toArray(new CustomMob[0]);

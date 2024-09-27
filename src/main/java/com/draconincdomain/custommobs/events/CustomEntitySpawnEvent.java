@@ -2,7 +2,6 @@ package com.draconincdomain.custommobs.events;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Annotations.Events;
-import com.draconincdomain.custommobs.core.Boss.LootTable;
 import com.draconincdomain.custommobs.core.RPGMobs.BossMob;
 import com.draconincdomain.custommobs.core.CustomEvents.CustomEntityEvent;
 import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;

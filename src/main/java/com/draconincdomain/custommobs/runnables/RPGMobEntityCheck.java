@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class that checks if custom mobs need to be despawned based on the distance from players.
+ * Extends the RunnableCore class.
+ */
 @Runnable
 public class RPGMobEntityCheck extends RunnableCore {
     public RPGMobEntityCheck() {
