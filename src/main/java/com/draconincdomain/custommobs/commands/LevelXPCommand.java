@@ -13,7 +13,7 @@ import java.util.List;
 @Commands
 public class LevelXPCommand extends CommandCore{
     public LevelXPCommand() {
-        super("levelxp", 0);
+        super("levelxp", "custom.admin",0);
     }
 
     @Override

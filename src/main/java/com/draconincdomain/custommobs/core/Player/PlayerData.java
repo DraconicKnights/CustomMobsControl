@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+/**
+ * Player Data object for dealing with and managing player data
+ */
 public class PlayerData {
     private final UUID playerUUID;
     private int level = 1;

@@ -30,6 +30,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * EntitySpawn Event that checks and deals with events related to the Custom Mob Manager
+ */
 @Events
 public class CustomEntitySpawnEvent implements Listener {
 

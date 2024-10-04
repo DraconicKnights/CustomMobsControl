@@ -31,3 +31,7 @@ commands:
     description: "opens the mob menu gui"
     usage: "/mobmenu"
     permission: custommobs.admin
+  vanish:
+    description: ""
+    usage: "/vanish"
+    permission: customobs.admin

@@ -12,7 +12,7 @@ import java.util.List;
 public class ReloadConfigCommand extends CommandCore {
 
     public ReloadConfigCommand() {
-        super("customreload", 0);
+        super("customreload","custom.admin", 0);
     }
 
     @Override

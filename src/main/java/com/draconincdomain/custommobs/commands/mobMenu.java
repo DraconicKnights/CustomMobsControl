@@ -10,7 +10,7 @@ import java.util.List;
 @Commands
 public class mobMenu extends CommandCore{
     public mobMenu() {
-        super("mobmenu", 0);
+        super("mobmenu","custom.admin", 0);
     }
 
     @Override

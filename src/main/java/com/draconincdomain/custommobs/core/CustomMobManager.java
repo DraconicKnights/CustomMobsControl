@@ -7,6 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * Custom Mob Manager that deals with mob management and creation
+ */
+
 public class CustomMobManager {
     private static CustomMobManager Instance;
     private static final java.util.Random random = new java.util.Random();

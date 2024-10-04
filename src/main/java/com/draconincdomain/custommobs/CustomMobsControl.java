@@ -20,7 +20,10 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.util.Set;
 
-
+/**
+ * Core class and entry point for the Plugin.
+ * Handles and deals with object instantiation, managing and logging
+ */
 public final class CustomMobsControl extends JavaPlugin {
 
     private static CustomMobsControl Instance;

@@ -13,7 +13,7 @@ import java.util.List;
 @Commands
 public class SpawnBossMob extends CommandCore{
     public SpawnBossMob() {
-        super("spawnboss", 0);
+        super("spawnboss","custom.admin", 0);
     }
 
     @Override

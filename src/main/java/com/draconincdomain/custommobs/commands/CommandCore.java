@@ -1,6 +1,7 @@
 package com.draconincdomain.custommobs.commands;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,12 +18,14 @@ import java.util.UUID;
 public abstract class CommandCore implements CommandExecutor, TabExecutor {
 
     protected String commandName;
+    protected String permission;
     protected int cooldownDuration;
     protected Map<UUID, Long> cooldowns = new HashMap<>();
 
-    public CommandCore(String cmdName, int cooldown) {
+    public CommandCore(String cmdName,@Nullable String permission, int cooldown) {
         CustomMobsControl.getInstance().getCommand(cmdName).setExecutor(this);
         this.commandName = cmdName;
+        this.permission = permission;
         this.cooldownDuration = cooldown;
     }
 
@@ -35,6 +38,11 @@ public abstract class CommandCore implements CommandExecutor, TabExecutor {
         if (commandSender instanceof Player) {
 
             Player player = (Player) commandSender;
+
+            if (!player.hasPermission(this.permission)) {
+                player.sendMessage(ChatColor.RED + "You don't have permission to use this command, please contact a server administrator");
+                return true;
+            }
 
             UUID playerID = player.getUniqueId();
             if (cooldowns.containsKey(playerID)) {

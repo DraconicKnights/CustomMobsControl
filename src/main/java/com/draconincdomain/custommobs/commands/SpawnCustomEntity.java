@@ -12,11 +12,14 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Command for submitting a spawn request for a custom mob
+ */
 @Commands
 public class SpawnCustomEntity extends CommandCore {
 
     public SpawnCustomEntity() {
-        super("custommob", 0);
+        super("custommob","custom.admin", 0);
     }
 
     @Override
