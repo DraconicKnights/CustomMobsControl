@@ -22,7 +22,7 @@ public abstract class CommandCore implements CommandExecutor, TabExecutor {
     protected int cooldownDuration;
     protected Map<UUID, Long> cooldowns = new HashMap<>();
 
-    public CommandCore(String cmdName,@Nullable String permission, int cooldown) {
+    public CommandCore(String cmdName, @Nullable String permission, int cooldown) {
         CustomMobsControl.getInstance().getCommand(cmdName).setExecutor(this);
         this.commandName = cmdName;
         this.permission = permission;
