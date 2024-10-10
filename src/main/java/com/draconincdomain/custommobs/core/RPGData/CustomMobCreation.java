@@ -11,6 +11,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
+/**
+ * Custom Mob Creation object
+ * Used for creating a valid Custom Mob using the mobs.yml file
+ */
 public class CustomMobCreation {
 
     public static CustomMob fromMap(Map<?, ?> mobMap) {

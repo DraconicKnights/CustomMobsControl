@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Multi Meteor Attack object extension of SpecialAttack,
+ * Will set the entity to be invulnerable for the duration of the storm along with particle additions and multiple fireballs descending from the sky
+ */
 public class MultiMeteorAttack extends SpecialAttack {
     public MultiMeteorAttack(LivingEntity target) {
         super(target);
@@ -24,9 +28,9 @@ public class MultiMeteorAttack extends SpecialAttack {
         List<Player> nearbyPlayers = getAllNearbyPlayers(target.getLocation(), 20);
 
         for (Player player : nearbyPlayers) {
-            target.setInvulnerable(true);  // Make the mob invincible until all meteors have landed
+            target.setInvulnerable(true);
 
-            final int numOfMeteors = 20;  // Number of meteors to spawn
+            final int numOfMeteors = 20;
             final BukkitRunnable[] meteorTasks = new BukkitRunnable[numOfMeteors];
             final List<Fireball> meteors = new ArrayList<>();
 
@@ -38,21 +42,18 @@ public class MultiMeteorAttack extends SpecialAttack {
 
                 final Vector direction = player.getLocation().toVector().subtract(fireballLocation.toVector()).normalize();
                 fireball.setDirection(direction);  // Point the fireball downward
-                player.sendTitle("§cBOSS ACTION", "§6Boss has used Multi-Meteor Storm!", 10, 70, 20);  // Alert player about the event
+                player.sendTitle("§cBOSS ACTION", "§6Boss has used Multi-Meteor Storm!", 10, 70, 20);
 
-                // Spawn particles periodically
                 meteorTasks[i] = new BukkitRunnable() {
 
                     double targetvar = 0;
                     Location location, first, second, third, fourth;
                     @Override
                     public void run() {
-                        // Stop this runnable and remove the meteor from the meteors list when it hits the ground
                         if (fireball.isDead()) {
                             meteors.remove(fireball);
                             this.cancel();
 
-                            // If there are no meteors left, make the mob vulnerable again
                             if (meteors.isEmpty()) {
                                 target.setInvulnerable(false);
                             }
@@ -72,14 +73,13 @@ public class MultiMeteorAttack extends SpecialAttack {
                         player.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, fourth, 0);
                     }
                 };
-                meteorTasks[i].runTaskTimer(CustomMobsControl.getInstance(), 0L, 1L);  // Start immediately, repeat every tick
+                meteorTasks[i].runTaskTimer(CustomMobsControl.getInstance(), 0L, 1L);
 
                 new BukkitRunnable() {
                     double targetvar = 0;
                     Location location, first, second;
                     @Override
                     public void run() {
-                        // Check if the fireball has hit the ground
                         if (fireball.isDead()) {
                             this.cancel();
                         }
@@ -93,7 +93,6 @@ public class MultiMeteorAttack extends SpecialAttack {
                         player.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, first, 0);
                         player.getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, second, 0);
 
-                        // Spawn particles at the fireball's location
                         player.getWorld().spawnParticle(Particle.FLAME, fireball.getLocation(), 10);
                     }
                 }.runTaskTimer(CustomMobsControl.getInstance(), 0L, 1L);

@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
- * Custom Mob Manager that deals with mob management and creation
+ * Custom Mob Manager that deals with mob management and spawning
  */
 
 public class CustomMobManager {

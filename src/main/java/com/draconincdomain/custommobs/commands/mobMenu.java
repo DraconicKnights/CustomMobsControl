@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * Mob menu command used for opening and instantiating a new instance of Mob Menu
+ */
 @Commands
 public class mobMenu extends CommandCore{
     public mobMenu() {

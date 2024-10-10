@@ -14,7 +14,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-
+/**
+ * Custom mob object
+ * Constructs the custom mob via the provided data and then used to manage custom mob
+ */
 public class CustomMob {
     private String name;
     private String mobNameID;

@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * Level XP Command used for setting the custom plugin XP value
+ */
 @Commands
 public class LevelXPCommand extends CommandCore{
     public LevelXPCommand() {

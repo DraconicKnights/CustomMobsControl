@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * Reload Config Command used for reloading all mob data and active entities
+ */
 @Commands
 public class ReloadConfigCommand extends CommandCore {
 

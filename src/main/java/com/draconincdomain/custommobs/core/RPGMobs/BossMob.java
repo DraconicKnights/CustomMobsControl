@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Boss mob object
+ * Constructs the boss mob via the provided data and then used to manage custom mob
+ */
 public class BossMob extends CustomMob {
     private String[] abilities; // Array of special abilities
     private int[] abilityLevels; // Array of ability levels

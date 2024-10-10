@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Command for submitting a spawn request for a custom mob
+ * Command for submitting a spawn request for a custom mob and grabbing the corresponding mob via the registered custom mob map
  */
 @Commands
 public class SpawnCustomEntity extends CommandCore {

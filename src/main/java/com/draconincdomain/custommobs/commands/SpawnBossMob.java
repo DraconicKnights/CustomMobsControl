@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * Spawn Boss Mob command used for spawning a custom boss mob from the registered entity map
+ */
 @Commands
 public class SpawnBossMob extends CommandCore{
     public SpawnBossMob() {

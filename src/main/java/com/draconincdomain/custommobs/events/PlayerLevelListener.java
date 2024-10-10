@@ -16,6 +16,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+/**
+ * Player Level listener
+ * Adjusts the players custom XP via event actions and scales based on each time and a multiplier within the Player YML
+ */
 @Events
 public class PlayerLevelListener implements Listener {
 

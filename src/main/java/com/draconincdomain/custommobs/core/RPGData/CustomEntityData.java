@@ -7,6 +7,10 @@ import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 
 import java.util.Map;
 
+/**
+ * Custom Entity Data
+ * Instantiated upon plugin initialization and passes the data from the yml towards the mob builder
+ */
 public class CustomEntityData {
 
     private static CustomEntityData Instance;

@@ -12,6 +12,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
+/**
+ * Item Builder class used for creating custom item data for other parts of the project
+ */
 public class ItemBuilder {
 
     public static ItemStack CreateCustomItem(Material material, boolean glow, String displayName, String metaContent) {

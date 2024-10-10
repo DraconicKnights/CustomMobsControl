@@ -10,6 +10,9 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.*;
 
+/**
+ *  GameEventScheduler used for managing and handling custom boss attacks via the in-built RunnableCore
+ */
 public class GameEventScheduler extends RunnableCore {
     private static Map<UUID, SpecialAttack> specialAttacks = new HashMap<>();
     private LivingEntity target;

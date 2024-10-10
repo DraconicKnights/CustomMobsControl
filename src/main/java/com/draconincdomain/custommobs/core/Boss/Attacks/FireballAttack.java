@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Fireball attack will spawn fireballs and launch them towards the players location from the sky
+ */
 public class FireballAttack extends SpecialAttack {
 
     public FireballAttack(LivingEntity target) {

@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Boss Mob Creation object
+ * Used for creating a valid Boss Mob which extends from Custom Mob using the mobs.yml file
+ */
 public class BossMobCreation {
     public static BossMob fromMap(Map<?, ?> bossMobMap) {
 

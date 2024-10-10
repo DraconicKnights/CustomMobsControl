@@ -52,9 +52,9 @@ public class EventTriggerControl extends RunnableCore {
                 int escalationLevel = escalationLevels.getOrDefault(player.getUniqueId(), 1);
 
                 if (ThreadLocalRandom.current().nextDouble() < 0.5) {
-                    escalationLevel = Math.min(escalationLevel + 1, 10); // Cap the escalation level
+                    escalationLevel = Math.min(escalationLevel + 1, 10);
                 } else {
-                    escalationLevel = Math.max(escalationLevel - 1, 1); // Ensure escalation level does not go below 1
+                    escalationLevel = Math.max(escalationLevel - 1, 1);
                 }
 
                 RandomEvents event = RandomEvents.values()[ThreadLocalRandom.current().nextInt(RandomEvents.values().length)];
@@ -65,7 +65,6 @@ public class EventTriggerControl extends RunnableCore {
         }
     }
 
-    // Method to execute events based on the enum
     private void executeAIEvent(Player player, RandomEvents event, int escalationLevel) {
         switch (event) {
             case REPLACE_TORCH:
@@ -110,10 +109,9 @@ public class EventTriggerControl extends RunnableCore {
         }
     }
 
-    // Replace torches out of the player's line of sight
     private void replaceOutOfSightTorches(Player player, int escalationLevel) {
         Location location = player.getLocation();
-        int radius = 10 + (escalationLevel * 5);  // Increase radius based on escalation level
+        int radius = 10 + (escalationLevel * 5);
 
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
@@ -138,7 +136,6 @@ public class EventTriggerControl extends RunnableCore {
         int minY = 30;
         int maxY = 50;
 
-        // Find a location far from the player and underground
         Location mineshaftLoc;
         do {
             int x = ThreadLocalRandom.current().nextInt(-maxDistance, maxDistance);
@@ -258,13 +255,11 @@ public class EventTriggerControl extends RunnableCore {
                     Location signLoc = loc.clone().add(x, y, z);
                     Block block = signLoc.getBlock();
 
-                    // Ensure sign is placed on top of a solid block
                     Block belowBlock = signLoc.clone().subtract(0, 1, 0).getBlock();
                     if (block.getType() == Material.AIR && belowBlock.getType().isSolid() && !isInLineOfSight(player, signLoc)) {
                         block.setType(Material.OAK_SIGN);
                         Sign sign = (Sign) block.getState();
 
-                        // Select random lines from the library
                         String[] randomLines = signLinesLibrary.get(ThreadLocalRandom.current().nextInt(signLinesLibrary.size()));
                         sign.setLine(0, ChatColor.DARK_PURPLE + randomLines[0]);
                         sign.setLine(1, ChatColor.DARK_RED + randomLines[1]);
@@ -277,7 +272,6 @@ public class EventTriggerControl extends RunnableCore {
         }
     }
 
-    // Event: Create fire near the player
     private void createRandomFire(Player player, int escalationLevel) {
         Location loc = player.getLocation();
         int radius = 10 + (int) (escalationLevel * 1.5);
@@ -296,7 +290,6 @@ public class EventTriggerControl extends RunnableCore {
         }
     }
 
-    // Event: Change the weather around the player
     private void changeWeatherNearPlayer(Player player, int escalationLevel) {
         World world = player.getWorld();
         WeatherType newWeather = (escalationLevel > 5) ? WeatherType.CLEAR : WeatherType.DOWNFALL;
@@ -306,7 +299,6 @@ public class EventTriggerControl extends RunnableCore {
     }
 
 
-    // Play random eerie sounds around the player
     private void playRandomEerieSounds(Player player, int escalationLevel) {
         Sound sound = escalationLevel > 3 ? Sound.ENTITY_WITHER_AMBIENT : Sound.AMBIENT_CAVE;
         float pitch = 1.0f - (escalationLevel * 0.1f);
@@ -329,7 +321,7 @@ public class EventTriggerControl extends RunnableCore {
 
     private void strikeLightning(Player player, int escalationLevel) {
         Location loc = player.getLocation();
-        for (int i = 0; i < escalationLevel; i++) {  // Strike lightning multiple times based on escalation level
+        for (int i = 0; i < escalationLevel; i++) {
             loc.getWorld().strikeLightningEffect(loc.add(ThreadLocalRandom.current().nextInt(-5, 5), 0, ThreadLocalRandom.current().nextInt(-5, 5)));
         }
         player.sendMessage(ChatColor.YELLOW + "Lightning strikes crash all around you!");
@@ -337,7 +329,7 @@ public class EventTriggerControl extends RunnableCore {
 
     private void giveRandomItem(Player player, int escalationLevel) {
         Material[] items = {Material.DIAMOND, Material.GOLD_INGOT, Material.EMERALD};
-        for (int i = 0; i < escalationLevel; i++) {  // Give more items as escalation level increases
+        for (int i = 0; i < escalationLevel; i++) {
             Material randomItem = items[ThreadLocalRandom.current().nextInt(items.length)];
             player.getInventory().addItem(new ItemStack(randomItem));
         }
@@ -356,19 +348,17 @@ public class EventTriggerControl extends RunnableCore {
     }
 
     private boolean isSurfaceVisible(Location location) {
-        // Check if the mineshaft is exposed to the surface
         int highestBlockY = location.getWorld().getHighestBlockYAt(location);
-        return location.getY() >= highestBlockY;  // Mineshaft is too close to the surface
+        return location.getY() >= highestBlockY;
     }
 
     private boolean isOnWater(Location location) {
-        // Check if the block below the location is water
         return location.getBlock().getRelative(BlockFace.DOWN).getType() == Material.WATER;
     }
 
     private boolean isTooCloseToExistingMineshaft(Location location) {
         for (Location mineshaftLoc : mineshaftLocations) {
-            if (location.distance(mineshaftLoc) < 50) { // 50 blocks distance
+            if (location.distance(mineshaftLoc) < 50) {
                 return true;
             }
         }
@@ -376,11 +366,9 @@ public class EventTriggerControl extends RunnableCore {
     }
 
     private boolean isInLineOfSight(Player player, Location targetLocation) {
-        // Perform a ray trace from the player's eye location to the target block location
         Location eyeLocation = player.getEyeLocation();
         Vector direction = targetLocation.toVector().subtract(eyeLocation.toVector()).normalize();
 
-        // Step through the line between the player and the target location to check for obstructions
         for (double distance = 0; distance <= eyeLocation.distance(targetLocation); distance += 0.5) {
             Location step = eyeLocation.clone().add(direction.clone().multiply(distance));
             Block block = step.getBlock();
@@ -389,17 +377,7 @@ public class EventTriggerControl extends RunnableCore {
                 return false;
             }
         }
-        return true;  // No obstructions, line of sight is clear
+        return true;
     }
 
-
-    // Track player interaction count for escalation
-    private int getPlayerInteractionCount(Player player) {
-        return playerInteractionMap.getOrDefault(player.getUniqueId(), 0);
-    }
-
-    // Update player interaction count
-    private void updatePlayerInteractionCount(Player player, int count) {
-        playerInteractionMap.put(player.getUniqueId(), count);
-    }
 }

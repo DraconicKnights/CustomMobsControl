@@ -6,6 +6,10 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Custom entity Event object that is created from the extension of the Event Object
+ * Will be triggered when a custom entity spawns near a player and passes the local player object and CustomMob object
+ */
 public class CustomEntityEvent extends Event {
 
     private final Player player;

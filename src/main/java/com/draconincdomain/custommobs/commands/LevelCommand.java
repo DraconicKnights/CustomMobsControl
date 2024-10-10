@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * Level command used for modifying the players level
+ */
 @Commands
 public class LevelCommand extends CommandCore{
     public LevelCommand() {

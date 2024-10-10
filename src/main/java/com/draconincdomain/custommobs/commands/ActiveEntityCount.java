@@ -7,6 +7,10 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+
+/**
+ * Active Entity Count for checking how many entities are currently spawned
+ */
 @Commands
 public class ActiveEntityCount extends CommandCore {
 

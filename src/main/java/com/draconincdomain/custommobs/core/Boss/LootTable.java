@@ -5,6 +5,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
+/**
+ * Custom Entity LootTable for plugin
+ */
 public class LootTable {
 
     // This map stores each ItemStack along with its probability (out of 100)

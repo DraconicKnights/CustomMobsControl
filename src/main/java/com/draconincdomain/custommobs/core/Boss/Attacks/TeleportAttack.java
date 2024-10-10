@@ -14,6 +14,10 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.Random;
 
+/**
+ * Teleportation Attack, will randomly teleport to another location within a near distance
+ * Will play particles and sounds on the player
+ */
 public class TeleportAttack extends SpecialAttack {
     private static Random random = new Random();
     public TeleportAttack(LivingEntity target) {

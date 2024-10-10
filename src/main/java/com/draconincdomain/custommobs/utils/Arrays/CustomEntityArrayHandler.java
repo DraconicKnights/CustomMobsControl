@@ -7,6 +7,10 @@ import org.bukkit.entity.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Custom Entity Array Handler
+ * Used for storing registered and active custom entities
+ */
 public class CustomEntityArrayHandler {
 
     private static Map<Integer, CustomMob> registeredMobs = new HashMap<>();

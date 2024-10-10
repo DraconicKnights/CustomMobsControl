@@ -3,6 +3,9 @@ package com.draconincdomain.custommobs.utils.Runnable;
 import com.draconincdomain.custommobs.CustomMobsControl;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/**
+ * Runnable Core used for all custom Runnable actions within this plugin
+ */
 public abstract class RunnableCore extends BukkitRunnable {
     private final CustomMobsControl plugin;
     private final long delayTicks;

@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Vanish command used to hide the player for others
+ */
 @Commands
 public class Vanish extends CommandCore {
 

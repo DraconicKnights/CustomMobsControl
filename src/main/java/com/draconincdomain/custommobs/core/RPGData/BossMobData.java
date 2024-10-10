@@ -6,6 +6,10 @@ import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 
 import java.util.Map;
 
+/**
+ * Boss Mob Data
+ * Instantiated upon plugin initialization and grabs the data from the yml and passes it to the Mob builder
+ */
 public class BossMobData {
     private static BossMobData instance;
 

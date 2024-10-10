@@ -11,6 +11,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
+/**
+ * Player Login and Logout listener
+ * Used for grabbing and saving custom player data
+ */
 @Events
 public class PlayerLoginAndLogoutListener implements Listener {
 

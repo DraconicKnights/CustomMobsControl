@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Player Data Manager, used for managing custom plugin data for each player
+ */
 public class PlayerDataManager {
 
     private static PlayerDataManager instance;
