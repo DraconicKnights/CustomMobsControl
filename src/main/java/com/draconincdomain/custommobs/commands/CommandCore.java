@@ -19,7 +19,6 @@ import java.util.UUID;
  * CommandCore, Used as a base for all in-game plugins commands with built in cooldown system and perm check
  */
 public abstract class CommandCore implements CommandExecutor, TabExecutor {
-
     protected String commandName;
     protected String permission;
     protected int cooldownDuration;
