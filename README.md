@@ -343,7 +343,7 @@ customBossMobs:
         dropChance: 0.4
 ```
 
-Makes use of a custom comamnd system for ease of use and registration of commands
+## Custom Command System for registering and ease of command handling
 ```java
 /**
  * CommandCore, Used as a base for all in-game plugins commands with built in cooldown system and perm check
