@@ -19,7 +19,6 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * EventTriggerControl class represents an EventController event checker that executes random events based on escalation levels and player interactions.
  */
-@Runnable
 public class EventTriggerControl extends RunnableCore {
 
     private final double chance = 0.80;

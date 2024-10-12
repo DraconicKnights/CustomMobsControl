@@ -11,6 +11,7 @@ import com.draconincdomain.custommobs.utils.Data.PlayerDataHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
+import com.draconincdomain.custommobs.utils.Handlers.RegionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,6 +56,7 @@ public final class CustomMobsControl extends JavaPlugin {
         new BossMobData();
         new CustomMobManager();
         new PlayerDataManager();
+        new RegionManager();
     }
 
     private void registerObjects() {

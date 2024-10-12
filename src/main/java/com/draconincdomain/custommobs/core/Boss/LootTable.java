@@ -3,22 +3,20 @@ package com.draconincdomain.custommobs.core.Boss;
 import com.draconincdomain.custommobs.utils.ItemDrop;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Custom Entity LootTable for plugin
  */
-public class LootTable {
+public class LootTable implements Serializable {
 
-    // This map stores each ItemStack along with its probability (out of 100)
     private final List<ItemDrop> lootItems = new ArrayList<>();
 
-    // Add item with drop chance
     public void addItem(ItemStack item, double chance) {
         lootItems.add(new ItemDrop(item, chance));
     }
 
-    // Drop loot
     public List<ItemStack> rollLoot() {
         List<ItemStack> dropItems = new ArrayList<>();
         Random rand = new Random();

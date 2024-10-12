@@ -3,34 +3,41 @@ package com.draconincdomain.custommobs.core.RPGMobs;
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.Boss.LootTable;
 import com.draconincdomain.custommobs.core.enums.LoggerLevel;
+import com.draconincdomain.custommobs.utils.Data.SerializableItemStack;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.ItemDrop;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Custom mob object
  * Constructs the custom mob via the provided data and then used to manage custom mob
  */
-public class CustomMob {
+public class CustomMob implements Serializable {
     private String name;
     private String mobNameID;
     private boolean champion;
     private int level;
     private double maxHealth;
     private int spawnChance;
-    private EntityType entityType;
-    private ItemStack weapon;
+    private transient EntityType entityType;
+    private String entityTypeName;
+    private SerializableItemStack weapon;
     private Double weaponDropChance;
-    private ItemStack[] armour;
+    private SerializableItemStack[] armour;
     private int mobID;
-    private Entity entity;
+    private transient Entity entity;
+    private UUID entityUUID;
     private double baseHealth;
     private final ItemDrop[] lootDrops;
     private LootTable lootTable;
@@ -42,9 +49,9 @@ public class CustomMob {
         this.maxHealth = maxHealth;
         this.spawnChance = spawnChance;
         this.entityType = entityType;
-        this.weapon = weapon;
+        this.weapon = weapon != null? new SerializableItemStack(weapon) : null;
         this.weaponDropChance = weaponDropChance;
-        this.armour = armour;
+        this.armour = fromItemStackArray(armour);
         this.mobID = mobID;
         this.baseHealth = maxHealth;
         this.lootDrops = lootDrops;
@@ -69,7 +76,6 @@ public class CustomMob {
         this.setLootTable(loot);
 
         if (this.getLootTable() == null) {
-            CustomMobsControl.getInstance().CustomMobLogger("Boss mob's loot table is empty", LoggerLevel.INFO);
         } else {
             StringBuilder lootContent = new StringBuilder();
             for (ItemDrop lootDrop : this.getLootDrops()) {
@@ -78,7 +84,6 @@ public class CustomMob {
                 lootContent.append("[").append(itemStack.getType().toString()).append(" x").append(itemStack.getAmount())
                         .append(", Chance: ").append(chance).append("], ");
             }
-            CustomMobsControl.getInstance().CustomMobLogger("Boss Mob loot content: " + lootContent.toString(), LoggerLevel.INFO);
         }
 
         // Set custom name
@@ -105,19 +110,19 @@ public class CustomMob {
     private void handleEquipment(LivingEntity entity) {
         EntityEquipment entityEquipment = entity.getEquipment();
 
-        if (armour != null) {
-            entityEquipment.setArmorContents(armour);
+        ItemStack[] actualArmour = getArmour();
+        if (actualArmour != null) {
+            entityEquipment.setArmorContents(actualArmour);
             entityEquipment.setHelmetDropChance(0f);
             entityEquipment.setChestplateDropChance(0f);
             entityEquipment.setLeggingsDropChance(0f);
             entityEquipment.setBootsDropChance(0f);
         }
 
-        if (weapon != null) {
-            entityEquipment.setItemInMainHand(weapon);
-            if (weaponDropChance != null) { // check for null before using weaponDropChance
-                entityEquipment.setItemInMainHandDropChance((float) (double) weaponDropChance);
-            }
+        ItemStack actualWeapon = getWeapon();
+        if (actualWeapon != null) {
+            entityEquipment.setItemInMainHand(actualWeapon);
+            entityEquipment.setItemInMainHandDropChance((float) (double) getWeaponDropChance());
         }
     }
 
@@ -158,18 +163,30 @@ public class CustomMob {
     }
 
     public EntityType getEntityType() {
-        return entityType;
+        if (this.entityType == null && this.entityTypeName != null) {
+            this.entityType = EntityType.valueOf(this.entityTypeName);
+        }
+        return this.entityType;
     }
-
     public ItemStack getWeapon() {
-        return weapon;
+        return weapon != null ? weapon.toItemStack() : null;
     }
 
     public double getWeaponDropChance() {
         return weaponDropChance != null ? weaponDropChance : 0;
     }
+
     public ItemStack[] getArmour() {
-        return armour;
+        if (armour == null) {
+            return null;
+        }
+
+        ItemStack[] rArmour = new ItemStack[armour.length];
+        for (int i = 0; i < armour.length; i++) {
+            SerializableItemStack stack = armour[i];
+            rArmour[i] = stack != null ? stack.toItemStack() : null;
+        }
+        return rArmour;
     }
 
     public int getMobID() {
@@ -177,9 +194,18 @@ public class CustomMob {
     }
 
     public Entity getEntity() {
-        return entity;
+        if (this.entity == null && this.entityUUID != null) {
+            for (World world : Bukkit.getWorlds()) {
+                for (Entity entity : world.getEntities()) {
+                    if (entity.getUniqueId().equals(this.entityUUID)) {
+                        this.entity = entity;
+                        break;
+                    }
+                }
+            }
+        }
+        return this.entity;
     }
-
     public ItemDrop[] getLootDrops() {
         return lootDrops;
     }
@@ -191,4 +217,16 @@ public class CustomMob {
         return this.lootTable;
     }
 
+    private SerializableItemStack[] fromItemStackArray(ItemStack[] armour) {
+        if (armour == null) {
+            return null;
+        }
+
+        SerializableItemStack[] sArmour = new SerializableItemStack[armour.length];
+        for (int i = 0; i < armour.length; i++) {
+            ItemStack stack = armour[i];
+            sArmour[i] = stack != null ? new SerializableItemStack(stack) : null;
+        }
+        return sArmour;
+    }
 }

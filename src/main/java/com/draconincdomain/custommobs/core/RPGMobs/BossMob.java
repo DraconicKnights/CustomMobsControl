@@ -32,7 +32,6 @@ public class BossMob extends CustomMob {
     private ItemDrop[] lootDrops; // Array of loot drops for boss mob
     private BossBar bossBar;
     private List<Audience> nearbyPlayers = new ArrayList<>();
-
     private LootTable lootTable;
 
 

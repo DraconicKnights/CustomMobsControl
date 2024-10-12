@@ -34,4 +34,8 @@ commands:
   vanish:
     description: ""
     usage: "/vanish"
-    permission: customobs.admin
+    permission: custommobs.admin
+  editor:
+    description: ""
+    usage: "/editor"
+    permission: custommobs.admin

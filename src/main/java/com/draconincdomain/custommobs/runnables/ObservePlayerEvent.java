@@ -28,7 +28,6 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see RunnableCore
  */
-@Runnable
 public class ObservePlayerEvent extends RunnableCore {
     private final double chance = 0.99;  // Probability of event happening
     private final int minDistance = 50;  // Minimum distance NPC spawns from player
