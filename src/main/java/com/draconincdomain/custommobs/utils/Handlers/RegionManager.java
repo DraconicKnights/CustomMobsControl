@@ -31,7 +31,7 @@ public class RegionManager {
     }
 
     public Region getRegionFromLocation(Location location) {
-        for(Region region : regions) { // Assume regions is a Collection of all regions managed by RegionManager
+        for(Region region : regions) { // grabs all regions from RegionManager
             if(region.isLocationInRegion(location)) {
                 return region;
             }
