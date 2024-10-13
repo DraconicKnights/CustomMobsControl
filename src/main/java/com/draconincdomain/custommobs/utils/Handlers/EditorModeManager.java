@@ -1,22 +1,22 @@
 package com.draconincdomain.custommobs.utils.Handlers;
 
-import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
+import com.draconincdomain.custommobs.core.enums.EditorAction;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.*;
-import java.nio.file.Files;
 import java.util.*;
 
 public class EditorModeManager {
     private static Set<UUID> editorPlayers = new HashSet<>();
     private static final Map<UUID, Region> playerRegions = new HashMap<>();
+    private static Map<UUID, EditorAction> playerActions = new HashMap<>();
 
     public static void enterEditorMode(Player player) {
         editorPlayers.add(player.getUniqueId());
@@ -70,6 +70,7 @@ public class EditorModeManager {
             player.sendMessage(ChatColor.GREEN + "Second corner set at " + formatLocation(location));
         }
         RegionManager.getInstance().addRegion(region);
+        displayRegionOutline(player, region);
     }
 
     public static void setRegionName(Player player, String name) {
@@ -95,6 +96,15 @@ public class EditorModeManager {
     public static void saveRegion(Player player) {
         Region region = getPlayerRegion(player);
         RegionManager.getInstance().saveRegion(region);
+        player.sendMessage(ChatColor.GOLD + "Region data has been saved successfully");
+    }
+
+    public static void setPlayerAction(Player player, EditorAction action) {
+        playerActions.put(player.getUniqueId(), action);
+    }
+
+    public static EditorAction getPlayerAction(Player player) {
+        return playerActions.getOrDefault(player.getUniqueId(), EditorAction.NONE);
     }
 
     public static void exitEditorMode(Player player) {
@@ -109,5 +119,30 @@ public class EditorModeManager {
 
     private static String formatLocation(Location location) {
         return String.format("(%d, %d, %d)", location.getBlockX(), location.getBlockY(), location.getBlockZ());
+    }
+
+    private static void displayRegionOutline(Player player, Region region) {
+        // Ensure both corners are set
+        Location firstCorner = region.getFirstCorner();
+        Location secondCorner = region.getSecondCorner();
+        if (firstCorner == null || secondCorner == null) {
+            return;
+        }
+
+        // Calculate min and max coordinates
+        int minX = Math.min(firstCorner.getBlockX(), secondCorner.getBlockX());
+        int maxX = Math.max(firstCorner.getBlockX(), secondCorner.getBlockX());
+        int minZ = Math.min(firstCorner.getBlockZ(), secondCorner.getBlockZ());
+        int maxZ = Math.max(firstCorner.getBlockZ(), secondCorner.getBlockZ());
+
+        // Spawn particles at the edges of the region, forming an outline
+        for (int x = minX; x <= maxX; x++) {
+            for (int z = minZ; z <= maxZ; z++) {
+                if (x == minX || x == maxX || z == minZ || z == maxZ) {
+                    Location loc = new Location(player.getWorld(), x, firstCorner.getY(), z);
+                    player.getWorld().spawnParticle(Particle.FLAME, loc, 3, 0, 0, 0, 0.0);
+                }
+            }
+        }
     }
 }

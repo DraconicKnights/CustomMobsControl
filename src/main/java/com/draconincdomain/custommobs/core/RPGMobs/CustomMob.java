@@ -6,6 +6,8 @@ import com.draconincdomain.custommobs.core.enums.LoggerLevel;
 import com.draconincdomain.custommobs.utils.Data.SerializableItemStack;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
+import com.draconincdomain.custommobs.utils.Handlers.Region;
+import com.draconincdomain.custommobs.utils.Handlers.RegionManager;
 import com.draconincdomain.custommobs.utils.ItemDrop;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,6 +40,7 @@ public class CustomMob implements Serializable {
     private int mobID;
     private transient Entity entity;
     private UUID entityUUID;
+    private transient Region region;
     private double baseHealth;
     private final ItemDrop[] lootDrops;
     private LootTable lootTable;
@@ -101,6 +104,9 @@ public class CustomMob implements Serializable {
         if (entity instanceof Zombie || entity instanceof Skeleton) {
             entity.setFireTicks(0);
         }
+
+        Region region = RegionManager.getInstance().getRegionFromLocation(location);
+        setRegion(region);
 
         // Set entity and add to custom entities
         setEntity(entity);
@@ -206,11 +212,17 @@ public class CustomMob implements Serializable {
         }
         return this.entity;
     }
+    public Region getRegion() {
+        return this.region;
+    }
     public ItemDrop[] getLootDrops() {
         return lootDrops;
     }
     public void setLootTable(LootTable loot){
         this.lootTable = loot;
+    }
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     public LootTable getLootTable(){

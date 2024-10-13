@@ -12,6 +12,7 @@ import com.draconincdomain.custommobs.utils.*;
 import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import com.draconincdomain.custommobs.utils.Data.MobDataHandler;
 import com.draconincdomain.custommobs.utils.Desing.ColourCode;
+import com.draconincdomain.custommobs.utils.Handlers.Region;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,7 +37,7 @@ import java.util.Map;
 @Events
 public class CustomEntitySpawnEvent implements Listener {
 
-    @EventHandler
+/*    @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         if (!Random.CustomSpawn(100)) return;
 
@@ -80,18 +81,23 @@ public class CustomEntitySpawnEvent implements Listener {
                 break;
             }
         }
-    }
+    }*/
 
     @EventHandler
     public void onCreatureDestroyed(EntityDeathEvent event) {
         Entity entity = event.getEntity();
 
-        // Handle for any entity
         if (CustomEntityArrayHandler.getCustomEntities().containsKey(entity)) {
             CustomMob customMob = CustomEntityArrayHandler.getCustomEntities().get(entity);
             CustomEntityArrayHandler.getCustomEntities().remove(entity);
 
             if (customMob != null) {
+                // Decrease the count of current mobs in the region
+                Region region = customMob.getRegion();
+                if(region != null){
+                    region.setCurrentMobs(region.getCurrentMobs() - 1);
+                }
+
                 List<ItemStack> lootToDrop = customMob.getLootTable().rollLoot();
                 // Log the loot to be dropped
                 CustomMobsControl.getInstance().CustomMobLogger("Loot to be dropped: " + lootToDrop.toString(), LoggerLevel.INFO);
@@ -99,10 +105,12 @@ public class CustomEntitySpawnEvent implements Listener {
                 List<ItemStack> drops = event.getDrops();
                 drops.clear();
                 drops.addAll(lootToDrop);
+
             } else {
                 CustomMobsControl.getInstance().CustomMobLogger("CustomMob is null", LoggerLevel.INFO);
             }
         }
+
 
         // Handle specifically for boss entities
         if (CustomEntityArrayHandler.getBossEntities().containsKey(entity)) {

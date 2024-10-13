@@ -36,15 +36,28 @@ public class Region implements Serializable {
     }
 
     public boolean isLocationInRegion(Location location) {
-        Location firstCornerLocation = toLocation(firstCorner);
-        Location secondCornerLocation = toLocation(secondCorner);
+        assert location != null;
 
-        return (location.getX() >= Math.min(firstCornerLocation.getX(), secondCornerLocation.getX()) &&
-                location.getX() <= Math.max(firstCornerLocation.getX(), secondCornerLocation.getX()) &&
-                location.getY() >= Math.min(firstCornerLocation.getY(), secondCornerLocation.getY()) &&
-                location.getY() <= Math.max(firstCornerLocation.getY(), secondCornerLocation.getY()) &&
-                location.getZ() >= Math.min(firstCornerLocation.getZ(), secondCornerLocation.getZ()) &&
-                location.getZ() <= Math.max(firstCornerLocation.getZ(), secondCornerLocation.getZ()));
+        Location firstCornerLocation = this.getFirstCorner();
+        Location secondCornerLocation = this.getSecondCorner();
+
+        // Check if corners are defined
+        if(firstCornerLocation == null || secondCornerLocation == null) {
+            return false;
+        }
+
+        // Check boundaries
+        double x = location.getX();
+        double y = location.getY();
+        double z = location.getZ();
+        double x1 = Math.min(secondCornerLocation.getX(), firstCornerLocation.getX());
+        double x2 = Math.max(secondCornerLocation.getX(), firstCornerLocation.getX());
+        double y1 = Math.min(secondCornerLocation.getY(), firstCornerLocation.getY());
+        double y2 = Math.max(secondCornerLocation.getY(), firstCornerLocation.getY());
+        double z1 = Math.min(secondCornerLocation.getZ(), firstCornerLocation.getZ());
+        double z2 = Math.max(secondCornerLocation.getZ(), firstCornerLocation.getZ());
+
+        return x >= x1 && x <= x2 && y >= y1 && y <= y2 && z >= z1 && z <= z2;
     }
 
     public Location getRandomLocation() {

@@ -3,6 +3,7 @@ package com.draconincdomain.custommobs.utils.Handlers;
 
 import com.draconincdomain.custommobs.CustomMobsControl;
 import com.draconincdomain.custommobs.core.RPGMobs.CustomMob;
+import com.draconincdomain.custommobs.utils.Arrays.CustomEntityArrayHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -27,6 +28,15 @@ public class RegionManager {
 
     public List<Region> getRegion() {
         return regions;
+    }
+
+    public Region getRegionFromLocation(Location location) {
+        for(Region region : regions) { // Assume regions is a Collection of all regions managed by RegionManager
+            if(region.isLocationInRegion(location)) {
+                return region;
+            }
+        }
+        return null;
     }
 
     public void saveRegion(Region region) {
@@ -69,6 +79,7 @@ public class RegionManager {
             int mobLevel = region.getMinLevel() + random.nextInt(region.getMaxLevel() - region.getMinLevel() + 1);
             Location spawnLocation = region.getRandomLocation();
             customMob.spawnEntity(spawnLocation, mobLevel);
+            CustomEntityArrayHandler.getCustomEntities().put(customMob.getEntity(), customMob);
         }
     }
 
